@@ -5,35 +5,83 @@ import { RootProvider } from "fumadocs-ui/provider/next"
 
 import "./globals.css"
 import { cn } from "@/lib/utils"
+import { SITE, ogImageUrl } from "@/lib/site"
 import { ThemeHotkey } from "@/components/theme-provider"
 
-const siteUrl = "https://threecn.dev"
+const defaultOg = ogImageUrl({
+  title: "3D scenes for shadcn/ui.",
+  subtitle: "Copy-paste React Three Fiber scenes that adapt to your shadcn theme.",
+})
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE.url),
   title: {
     default: "threecn — 3D scenes for shadcn/ui",
     template: "%s — threecn",
   },
-  description:
-    "Copy-paste React Three Fiber scenes that auto-adapt to your shadcn theme. Dark mode included. Zero Three.js expertise required.",
+  description: SITE.description,
+  applicationName: SITE.name,
+  authors: [{ name: "ln-dev7", url: SITE.twitter }],
+  creator: "ln-dev7",
   keywords: [
     "react three fiber",
+    "r3f",
     "drei",
     "shadcn",
+    "shadcn registry",
     "3D",
-    "threejs",
-    "registry",
+    "three.js",
+    "webgl",
     "nextjs",
   ],
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "threecn — 3D scenes for shadcn/ui",
-    description:
-      "Copy-paste React Three Fiber scenes that auto-adapt to your shadcn theme.",
-    url: siteUrl,
-    siteName: "threecn",
     type: "website",
+    siteName: SITE.name,
+    url: SITE.url,
+    title: "threecn — 3D scenes for shadcn/ui",
+    description: SITE.description,
+    images: [{ url: defaultOg, width: 1200, height: 630, alt: SITE.title }],
   },
+  twitter: {
+    card: "summary_large_image",
+    site: SITE.twitterHandle,
+    creator: SITE.twitterHandle,
+    title: "threecn — 3D scenes for shadcn/ui",
+    description: SITE.description,
+    images: [defaultOg],
+  },
+  robots: { index: true, follow: true },
+}
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE.url}/#org`,
+      name: SITE.name,
+      url: SITE.url,
+      logo: `${SITE.url}/banner.png`,
+      sameAs: [SITE.github, SITE.twitter],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      name: SITE.name,
+      url: SITE.url,
+      inLanguage: "en",
+      publisher: { "@id": `${SITE.url}/#org` },
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: SITE.name,
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Web",
+      description: SITE.description,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+  ],
 }
 
 export default function RootLayout({
@@ -48,6 +96,10 @@ export default function RootLayout({
       className={cn(GeistSans.variable, GeistMono.variable)}
     >
       <body className="flex min-h-screen flex-col font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <RootProvider
           theme={{
             attribute: "class",

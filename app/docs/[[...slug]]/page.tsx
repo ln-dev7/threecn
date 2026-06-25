@@ -8,6 +8,7 @@ import {
 } from "fumadocs-ui/page"
 
 import { source } from "@/lib/source"
+import { ogImageUrl } from "@/lib/site"
 import { getMDXComponents } from "@/components/mdx"
 
 export default async function Page(props: {
@@ -41,8 +42,23 @@ export async function generateMetadata(props: {
   const page = source.getPage(params.slug)
   if (!page) notFound()
 
+  const og = ogImageUrl({
+    eyebrow: "Documentation",
+    title: page.data.title,
+    subtitle: page.data.description,
+  })
+
   return {
     title: page.data.title,
     description: page.data.description,
+    alternates: { canonical: page.url },
+    openGraph: {
+      type: "article",
+      url: page.url,
+      title: page.data.title,
+      description: page.data.description,
+      images: [{ url: og, width: 1200, height: 630, alt: page.data.title }],
+    },
+    twitter: { card: "summary_large_image", images: [og] },
   }
 }
