@@ -5,31 +5,4 @@ description: A polished rounded volume with orbit controls. Hovering slows the a
 
 A polished rounded volume with orbit controls. Hovering slows the auto-rotation. The material picks up `--primary` as an emissive tint.
 
-<ScenePreview slug="product-viewer" height={380} />
-
-## Installation
-
-```bash
-npx shadcn add https://threecn.dev/r/product-viewer.json
-```
-
-## Usage
-
-```tsx
-import { ProductViewer } from "@/components/threecn/product-viewer"
-
-export default function Example() {
-  return (
-    <ProductViewer autoRotate autoRotateSpeed={1} className="h-80 rounded-lg" />
-  )
-}
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `autoRotate` | `boolean` | `true` | Auto-rotate the object. |
-| `autoRotateSpeed` | `number` | `1` | Rotation speed multiplier. |
-| `className` | `string` | `—` | Classes for the wrapper element (set its height here). |
-| `theme` | `"auto" \| "light" \| "dark"` | `"auto"` | Color source. auto reads the live shadcn theme. |
+<ScenePlayground slug="product-viewer" />

@@ -5,37 +5,4 @@ description: The themed canvas wrapper every other scene builds on. It sets up t
 
 The themed canvas wrapper every other scene builds on. It sets up the `<Canvas>`, camera, a fully offline lighting rig (no HDRI downloads) and optional fog.
 
-<ScenePreview slug="scene-container" height={380} />
-
-## Installation
-
-```bash
-npx shadcn add https://threecn.dev/r/scene-container.json
-```
-
-## Usage
-
-```tsx
-import { SceneContainer } from "@/components/threecn/scene-container"
-
-export default function Example() {
-  return (
-    <SceneContainer environment="dawn" fog className="h-72 rounded-lg">
-      <mesh>
-        <icosahedronGeometry args={[1.6, 0]} />
-        <meshStandardMaterial color="#7c3aed" />
-      </mesh>
-    </SceneContainer>
-  )
-}
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `className` | `string` | `—` | Classes for the wrapper element (set its height here). |
-| `theme` | `"auto" \| "light" \| "dark"` | `"auto"` | Color source. auto reads the live shadcn theme. |
-| `environment` | `"studio" \| "city" \| "dawn" \| "night"` | `"studio"` | Offline lighting rig preset. |
-| `fog` | `boolean` | `false` | Adds themed fog using --background. |
-| `children` | `ReactNode` | `—` | Your 3D content. |
+<ScenePlayground slug="scene-container" />

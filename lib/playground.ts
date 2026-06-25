@@ -1,0 +1,97 @@
+import type { SceneSlug } from "@/components/threecn/scene-by-slug"
+
+export type Control =
+  | {
+      kind: "slider"
+      prop: string
+      label: string
+      min: number
+      max: number
+      step: number
+      unit?: string
+    }
+  | {
+      kind: "select"
+      prop: string
+      label: string
+      options: { value: string; label: string }[]
+    }
+  | { kind: "switch"; prop: string; label: string }
+  | { kind: "text"; prop: string; label: string }
+  | { kind: "color"; prop: string; label: string }
+
+export type PlaygroundConfig = {
+  /** Default prop values, also the playground's initial state. */
+  defaults: Record<string, unknown>
+  /** Interactive controls bound to props. */
+  controls: Control[]
+  /** Runtime npm dependencies for this scene. */
+  dependencies: string[]
+}
+
+const ENV_OPTIONS = [
+  { value: "studio", label: "Studio" },
+  { value: "city", label: "City" },
+  { value: "dawn", label: "Dawn" },
+  { value: "night", label: "Night" },
+]
+
+const R3F_DEPS = ["three", "@react-three/fiber", "@react-three/drei"]
+
+export const PLAYGROUNDS: Record<SceneSlug, PlaygroundConfig> = {
+  "scene-container": {
+    defaults: { environment: "dawn", fog: false },
+    controls: [
+      { kind: "select", prop: "environment", label: "Environment", options: ENV_OPTIONS },
+      { kind: "switch", prop: "fog", label: "Fog" },
+    ],
+    dependencies: R3F_DEPS,
+  },
+  "particle-field": {
+    defaults: { count: 1500, speed: 0.3, environment: "night" },
+    controls: [
+      { kind: "slider", prop: "count", label: "Count", min: 300, max: 3000, step: 100 },
+      { kind: "slider", prop: "speed", label: "Speed", min: 0.1, max: 1.5, step: 0.1 },
+      { kind: "select", prop: "environment", label: "Environment", options: ENV_OPTIONS },
+    ],
+    dependencies: R3F_DEPS,
+  },
+  "product-viewer": {
+    defaults: { autoRotate: true, autoRotateSpeed: 1, environment: "studio" },
+    controls: [
+      { kind: "switch", prop: "autoRotate", label: "Auto-rotate" },
+      {
+        kind: "slider",
+        prop: "autoRotateSpeed",
+        label: "Rotate speed",
+        min: 0.2,
+        max: 3,
+        step: 0.1,
+      },
+      { kind: "select", prop: "environment", label: "Environment", options: ENV_OPTIONS },
+    ],
+    dependencies: R3F_DEPS,
+  },
+  "floating-card-3d": {
+    defaults: { tiltStrength: 15, environment: "city" },
+    controls: [
+      { kind: "slider", prop: "tiltStrength", label: "Tilt", min: 0, max: 40, step: 1, unit: "°" },
+      { kind: "select", prop: "environment", label: "Environment", options: ENV_OPTIONS },
+    ],
+    dependencies: R3F_DEPS,
+  },
+  "text-3d": {
+    defaults: { text: "threecn", size: 0.9, depth: 0.3 },
+    controls: [
+      { kind: "text", prop: "text", label: "Text" },
+      { kind: "slider", prop: "size", label: "Size", min: 0.4, max: 1.6, step: 0.1 },
+      { kind: "slider", prop: "depth", label: "Depth", min: 0.05, max: 0.8, step: 0.05 },
+    ],
+    dependencies: R3F_DEPS,
+  },
+  "product-showcase": {
+    defaults: { color: "#7c3aed" },
+    controls: [{ kind: "color", prop: "color", label: "Product color" }],
+    dependencies: R3F_DEPS,
+  },
+}
