@@ -181,6 +181,87 @@ export const SCENES: SceneMeta[] = [
       ...commonProps,
     ],
   },
+  {
+    slug: "globe",
+    name: "Globe",
+    componentName: "Globe",
+    title: "Globe",
+    description:
+      "A dotted globe rotating slowly with orbit rings, colored with --primary.",
+    props: [
+      {
+        name: "dots",
+        type: "number",
+        default: "1800",
+        description: "Number of surface dots.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "0.3",
+        description: "Rotation speed multiplier.",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "wave-terrain",
+    name: "WaveTerrain",
+    componentName: "WaveTerrain",
+    title: "Wave Terrain",
+    description:
+      "An undulating wireframe terrain in perspective, drawn with --primary.",
+    props: [
+      {
+        name: "amplitude",
+        type: "number",
+        default: "0.6",
+        description: "Peak height of the waves.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "0.6",
+        description: "Animation speed multiplier.",
+      },
+      {
+        name: "density",
+        type: "number",
+        default: "48",
+        description: "Grid resolution (segments per side).",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "floating-shapes",
+    name: "FloatingShapes",
+    componentName: "FloatingShapes",
+    title: "Floating Shapes",
+    description:
+      "A drifting cluster of low-poly shapes that float and react to the pointer.",
+    props: [
+      {
+        name: "count",
+        type: "number",
+        default: "12",
+        description: "Number of shapes.",
+      },
+      {
+        name: "spread",
+        type: "number",
+        default: "5",
+        description: "How far shapes spread from the center.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Float animation speed multiplier.",
+      },
+      ...commonProps,
+    ],
+  },
 ]
 
 export const REGISTRY_BASE = "https://threecn.dev/r"

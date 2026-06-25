@@ -10,6 +10,9 @@ import type { FloatingCard3DProps } from "@/components/threecn/floating-card-3d"
 import type { Text3DProps } from "@/components/threecn/text-3d"
 import type { ProductShowcaseProps } from "@/components/threecn/product-showcase"
 import type { SceneContainerProps } from "@/components/threecn/scene-container"
+import type { GlobeProps } from "@/components/threecn/globe"
+import type { WaveTerrainProps } from "@/components/threecn/wave-terrain"
+import type { FloatingShapesProps } from "@/components/threecn/floating-shapes"
 
 function Loading() {
   return (
@@ -46,6 +49,19 @@ const SceneContainer = dynamic(
     import("@/components/threecn/scene-container").then((m) => m.SceneContainer),
   { ssr: false, loading: Loading }
 )
+const Globe = dynamic(
+  () => import("@/components/threecn/globe").then((m) => m.Globe),
+  { ssr: false, loading: Loading }
+)
+const WaveTerrain = dynamic(
+  () => import("@/components/threecn/wave-terrain").then((m) => m.WaveTerrain),
+  { ssr: false, loading: Loading }
+)
+const FloatingShapes = dynamic(
+  () =>
+    import("@/components/threecn/floating-shapes").then((m) => m.FloatingShapes),
+  { ssr: false, loading: Loading }
+)
 
 export type SceneSlug =
   | "scene-container"
@@ -54,6 +70,9 @@ export type SceneSlug =
   | "floating-card-3d"
   | "text-3d"
   | "product-showcase"
+  | "globe"
+  | "wave-terrain"
+  | "floating-shapes"
 
 export function SceneBySlug({
   slug,
@@ -102,6 +121,12 @@ export function SceneBySlug({
           </mesh>
         </SceneContainer>
       )
+    case "globe":
+      return <Globe {...(shared as GlobeProps)} />
+    case "wave-terrain":
+      return <WaveTerrain {...(shared as WaveTerrainProps)} />
+    case "floating-shapes":
+      return <FloatingShapes {...(shared as FloatingShapesProps)} />
     default:
       return null
   }

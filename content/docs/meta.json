@@ -10,6 +10,9 @@
     "scenes/product-viewer",
     "scenes/floating-card-3d",
     "scenes/text-3d",
-    "scenes/product-showcase"
+    "scenes/product-showcase",
+    "scenes/globe",
+    "scenes/wave-terrain",
+    "scenes/floating-shapes"
   ]
 }

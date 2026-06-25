@@ -124,6 +124,42 @@
           "type": "registry:hook"
         }
       ]
+    },
+    {
+      "name": "globe",
+      "type": "registry:ui",
+      "title": "Globe",
+      "description": "A dotted globe rotating slowly with orbit rings, colored with your --primary token.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        { "path": "components/threecn/globe.tsx", "type": "registry:ui" },
+        { "path": "components/threecn/scene-container.tsx", "type": "registry:ui" },
+        { "path": "components/hooks/use-shadcn-theme.ts", "type": "registry:hook" }
+      ]
+    },
+    {
+      "name": "wave-terrain",
+      "type": "registry:ui",
+      "title": "WaveTerrain",
+      "description": "An undulating wireframe terrain in perspective, drawn with --primary.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        { "path": "components/threecn/wave-terrain.tsx", "type": "registry:ui" },
+        { "path": "components/threecn/scene-container.tsx", "type": "registry:ui" },
+        { "path": "components/hooks/use-shadcn-theme.ts", "type": "registry:hook" }
+      ]
+    },
+    {
+      "name": "floating-shapes",
+      "type": "registry:ui",
+      "title": "FloatingShapes",
+      "description": "A drifting cluster of low-poly shapes that float and react to the pointer.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        { "path": "components/threecn/floating-shapes.tsx", "type": "registry:ui" },
+        { "path": "components/threecn/scene-container.tsx", "type": "registry:ui" },
+        { "path": "components/hooks/use-shadcn-theme.ts", "type": "registry:hook" }
+      ]
     }
   ]
 }

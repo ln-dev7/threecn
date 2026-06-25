@@ -94,4 +94,30 @@ export const PLAYGROUNDS: Record<SceneSlug, PlaygroundConfig> = {
     controls: [{ kind: "color", prop: "color", label: "Product color" }],
     dependencies: R3F_DEPS,
   },
+  globe: {
+    defaults: { dots: 1800, speed: 0.3 },
+    controls: [
+      { kind: "slider", prop: "dots", label: "Dots", min: 600, max: 3500, step: 100 },
+      { kind: "slider", prop: "speed", label: "Speed", min: 0.05, max: 1.5, step: 0.05 },
+    ],
+    dependencies: R3F_DEPS,
+  },
+  "wave-terrain": {
+    defaults: { amplitude: 0.6, speed: 0.6, density: 48 },
+    controls: [
+      { kind: "slider", prop: "amplitude", label: "Amplitude", min: 0.1, max: 1.5, step: 0.1 },
+      { kind: "slider", prop: "speed", label: "Speed", min: 0.1, max: 2, step: 0.1 },
+      { kind: "slider", prop: "density", label: "Density", min: 16, max: 96, step: 8 },
+    ],
+    dependencies: R3F_DEPS,
+  },
+  "floating-shapes": {
+    defaults: { count: 12, spread: 5, speed: 1 },
+    controls: [
+      { kind: "slider", prop: "count", label: "Count", min: 4, max: 26, step: 1 },
+      { kind: "slider", prop: "spread", label: "Spread", min: 2, max: 8, step: 0.5 },
+      { kind: "slider", prop: "speed", label: "Speed", min: 0.2, max: 2.5, step: 0.1 },
+    ],
+    dependencies: R3F_DEPS,
+  },
 }
