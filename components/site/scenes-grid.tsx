@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { IconArrowUpRight } from "@tabler/icons-react"
+import { IconArrowsMaximize, IconArrowUpRight, IconBook2 } from "@tabler/icons-react"
 
 import { SCENES, installCommand } from "@/lib/scenes"
 import { SceneBySlug, type SceneSlug } from "@/components/threecn/scene-by-slug"
@@ -31,18 +31,33 @@ export function ScenesGrid() {
           >
             <div className="relative h-44 border-b border-border bg-muted/30">
               <SceneBySlug slug={scene.slug as SceneSlug} className="h-full w-full" />
-              <Link
-                href={`/preview/${scene.slug}`}
-                target="_blank"
-                className="absolute top-2 right-2 rounded-md bg-background/70 p-1.5 text-muted-foreground opacity-0 backdrop-blur transition-opacity group-hover:opacity-100 hover:text-foreground"
-                aria-label="Open fullscreen preview"
-              >
-                <IconArrowUpRight className="size-4" />
-              </Link>
+              <div className="absolute top-2 right-2 flex gap-1.5 opacity-0 transition-opacity group-hover:opacity-100">
+                <Link
+                  href={`/docs/scenes/${scene.slug}`}
+                  className="rounded-md bg-background/70 p-1.5 text-muted-foreground backdrop-blur transition-colors hover:text-foreground"
+                  aria-label="Open documentation"
+                >
+                  <IconBook2 className="size-4" />
+                </Link>
+                <Link
+                  href={`/preview/${scene.slug}`}
+                  target="_blank"
+                  className="rounded-md bg-background/70 p-1.5 text-muted-foreground backdrop-blur transition-colors hover:text-foreground"
+                  aria-label="Open fullscreen preview"
+                >
+                  <IconArrowsMaximize className="size-4" />
+                </Link>
+              </div>
             </div>
             <div className="flex flex-1 flex-col gap-3 p-4">
               <div>
-                <h3 className="font-mono text-sm font-semibold">{scene.name}</h3>
+                <Link
+                  href={`/docs/scenes/${scene.slug}`}
+                  className="group/title inline-flex items-center gap-1 font-mono text-sm font-semibold transition-colors hover:text-primary"
+                >
+                  {scene.name}
+                  <IconArrowUpRight className="size-3.5 opacity-0 transition-opacity group-hover/title:opacity-100" />
+                </Link>
                 <p className="mt-1 text-sm text-muted-foreground">
                   {scene.description}
                 </p>
