@@ -1,0 +1,129 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "threecn",
+  "homepage": "https://threecn.dev",
+  "items": [
+    {
+      "name": "scene-container",
+      "type": "registry:ui",
+      "title": "SceneContainer",
+      "description": "Base R3F canvas wrapper with theme-aware environment and camera setup.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "particle-field",
+      "type": "registry:ui",
+      "title": "ParticleField",
+      "description": "A drifting cloud of particles colored with your shadcn --primary and --muted-foreground tokens.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        {
+          "path": "components/threecn/particle-field.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "product-viewer",
+      "type": "registry:ui",
+      "title": "ProductViewer",
+      "description": "An orbitable, polished product volume with an emissive --primary tint; hover slows the spin.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        {
+          "path": "components/threecn/product-viewer.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "floating-card-3d",
+      "type": "registry:ui",
+      "title": "FloatingCard3D",
+      "description": "A parallax-tilting 3D card with a --background surface, --border edges, and an HTML overlay.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        {
+          "path": "components/threecn/floating-card-3d.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "text-3d",
+      "type": "registry:ui",
+      "title": "Text3D",
+      "description": "Extruded, floating 3D text rendered with drei <Text3D>, colored with --primary.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        {
+          "path": "components/threecn/text-3d.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "product-showcase",
+      "type": "registry:ui",
+      "title": "ProductShowcase",
+      "description": "A product on a circular pedestal with soft contact shadows, studio lighting and slow auto-rotate.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        {
+          "path": "components/threecn/product-showcase.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    }
+  ]
+}
