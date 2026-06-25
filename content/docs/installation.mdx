@@ -1,0 +1,58 @@
+---
+title: Installation
+description: Add any threecn scene to your project with the shadcn CLI.
+---
+
+## Prerequisites
+
+threecn assumes a typical shadcn/ui setup:
+
+- A **Next.js** (or any React) app with **Tailwind CSS v4**.
+- **shadcn/ui** initialized (`npx shadcn init`) with CSS variables enabled.
+- Your theme uses standard tokens: `--primary`, `--background`, `--border`,
+  `--muted-foreground`, `--accent`.
+
+The 3D peer dependencies (`three`, `@react-three/fiber`, `@react-three/drei`)
+are installed automatically by the CLI.
+
+## Install a single scene
+
+Every scene is published as a registry item. Add one with:
+
+```bash
+npx shadcn add https://threecn.dev/r/particle-field.json
+```
+
+This drops two files into your project:
+
+- `components/threecn/particle-field.tsx` — the scene.
+- `components/hooks/use-shadcn-theme.ts` — the theme bridge (shared by all
+  scenes, installed once).
+
+## Install everything
+
+Run the `add` command for each scene you want:
+
+```bash
+npx shadcn add https://threecn.dev/r/scene-container.json
+npx shadcn add https://threecn.dev/r/particle-field.json
+npx shadcn add https://threecn.dev/r/product-viewer.json
+npx shadcn add https://threecn.dev/r/floating-card-3d.json
+npx shadcn add https://threecn.dev/r/text-3d.json
+npx shadcn add https://threecn.dev/r/product-showcase.json
+```
+
+The hook is only written once — subsequent installs reuse it.
+
+## Use it
+
+```tsx
+import { ParticleField } from "@/components/threecn/particle-field"
+
+export default function Page() {
+  return <ParticleField className="h-64 rounded-lg" />
+}
+```
+
+Set the height on the wrapper via `className`. That's it — the scene reads your
+theme automatically. Head to [Theming](/docs/theming) to learn how.

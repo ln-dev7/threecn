@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "---Getting Started---",
+    "index",
+    "installation",
+    "theming",
+    "---Scenes---",
+    "scenes/scene-container",
+    "scenes/particle-field",
+    "scenes/product-viewer",
+    "scenes/floating-card-3d",
+    "scenes/text-3d",
+    "scenes/product-showcase"
+  ]
+}

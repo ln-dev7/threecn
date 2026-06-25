@@ -1,0 +1,39 @@
+---
+title: FloatingCard3D
+description: A flat card floating in 3D space that tilts toward the cursor with spring smoothing. The surface uses --background with --border edges. Overlay real H
+---
+
+A flat card floating in 3D space that tilts toward the cursor with spring smoothing. The surface uses `--background` with `--border` edges. Overlay real HTML via drei `<Html>`.
+
+<ScenePreview slug="floating-card-3d" height={380} />
+
+## Installation
+
+```bash
+npx shadcn add https://threecn.dev/r/floating-card-3d.json
+```
+
+## Usage
+
+```tsx
+import { FloatingCard3D } from "@/components/threecn/floating-card-3d"
+
+export default function Example() {
+  return (
+    <FloatingCard3D tiltStrength={15} className="h-80 rounded-lg">
+      <div className="p-4 text-center">
+        <p className="text-lg font-semibold">Tilt me</p>
+      </div>
+    </FloatingCard3D>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `tiltStrength` | `number` | `15` | Max tilt in degrees. |
+| `children` | `ReactNode` | `—` | HTML overlaid on the card. |
+| `className` | `string` | `—` | Classes for the wrapper element (set its height here). |
+| `theme` | `"auto" \| "light" \| "dark"` | `"auto"` | Color source. auto reads the live shadcn theme. |

@@ -1,0 +1,37 @@
+---
+title: Text3D
+description: Extruded, slowly floating 3D text rendered with drei <Text3D>, colored with --primary. Defaults to a typeface served from the jsDelivr npm mirror; pas
+---
+
+Extruded, slowly floating 3D text rendered with drei `<Text3D>`, colored with `--primary`. Defaults to a typeface served from the jsDelivr npm mirror; pass `font` to bundle your own.
+
+<ScenePreview slug="text-3d" height={380} />
+
+## Installation
+
+```bash
+npx shadcn add https://threecn.dev/r/text-3d.json
+```
+
+## Usage
+
+```tsx
+import { Text3D } from "@/components/threecn/text-3d"
+
+export default function Example() {
+  return (
+    <Text3D text="threecn" size={1} depth={0.3} className="h-72 rounded-lg" />
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | `(required)` | The string to extrude. |
+| `size` | `number` | `1` | Glyph size. |
+| `depth` | `number` | `0.3` | Extrusion depth. |
+| `font` | `string` | `Helvetiker Bold (CDN)` | Path/URL to a three.js typeface JSON. |
+| `className` | `string` | `—` | Classes for the wrapper element (set its height here). |
+| `theme` | `"auto" \| "light" \| "dark"` | `"auto"` | Color source. auto reads the live shadcn theme. |

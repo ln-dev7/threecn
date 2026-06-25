@@ -1,0 +1,35 @@
+---
+title: ParticleField
+description: A slowly drifting cloud of particles. Foreground particles use --primary, the rest use --muted-foreground. Great as a hero background.
+---
+
+A slowly drifting cloud of particles. Foreground particles use `--primary`, the rest use `--muted-foreground`. Great as a hero background.
+
+<ScenePreview slug="particle-field" height={380} />
+
+## Installation
+
+```bash
+npx shadcn add https://threecn.dev/r/particle-field.json
+```
+
+## Usage
+
+```tsx
+import { ParticleField } from "@/components/threecn/particle-field"
+
+export default function Example() {
+  return (
+    <ParticleField count={1500} speed={0.3} className="h-72 rounded-lg" />
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `count` | `number` | `1500` | Number of particles. |
+| `speed` | `number` | `0.3` | Drift and rotation speed multiplier. |
+| `className` | `string` | `—` | Classes for the wrapper element (set its height here). |
+| `theme` | `"auto" \| "light" \| "dark"` | `"auto"` | Color source. auto reads the live shadcn theme. |

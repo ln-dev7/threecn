@@ -1,0 +1,38 @@
+---
+title: Introduction
+description: Theme-aware React Three Fiber scenes, installable with the shadcn CLI.
+---
+
+**threecn** is a registry of ready-to-use React Three Fiber (R3F) + drei scenes
+that you install with the shadcn CLI. Each scene reads your shadcn design tokens
+and renders itself in the right colors — light or dark — with no extra wiring.
+
+## The CSS → WebGL bridge
+
+shadcn/ui stores its palette as CSS custom properties (`--primary`,
+`--background`, `--border`, …). Three.js, on the other hand, needs
+`THREE.Color` instances on its materials. The two never talk to each other.
+
+threecn closes that gap with one small hook, `useShadcnTheme()`:
+
+1. It reads your CSS variables from `document.documentElement` on mount.
+2. It parses the HSL values into `THREE.Color` instances.
+3. It watches the `<html>` element with a `MutationObserver`, so when
+   next-themes toggles the `.dark` class — or you change `--primary` at
+   runtime — every scene recolors itself instantly.
+
+The result: drop a scene into your shadcn app and **dark mode just works**.
+
+## What's included
+
+- **SceneContainer** — the themed canvas wrapper every scene builds on.
+- **ParticleField** — a drifting cloud of theme-colored particles.
+- **ProductViewer** — an orbitable, polished product volume.
+- **FloatingCard3D** — a parallax-tilting card with HTML overlay.
+- **Text3D** — extruded, floating 3D text.
+- **ProductShowcase** — a product on a pedestal with soft shadows.
+
+## Next steps
+
+- [Installation](/docs/installation) — add a scene to your project.
+- [Theming](/docs/theming) — how the bridge works and how to override it.

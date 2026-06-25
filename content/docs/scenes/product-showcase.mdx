@@ -1,0 +1,36 @@
+---
+title: ProductShowcase
+description: A product composed of merged geometry resting on a circular pedestal under soft contact shadows and studio lighting, with a slow auto-rotation.
+---
+
+A product composed of merged geometry resting on a circular pedestal under soft contact shadows and studio lighting, with a slow auto-rotation.
+
+<ScenePreview slug="product-showcase" height={380} />
+
+## Installation
+
+```bash
+npx shadcn add https://threecn.dev/r/product-showcase.json
+```
+
+## Usage
+
+```tsx
+import { ProductShowcase } from "@/components/threecn/product-showcase"
+
+export default function Example() {
+  return (
+    <ProductShowcase className="h-80 rounded-lg" />
+    // or override the theme color:
+    <ProductShowcase color="#22d3ee" className="h-80 rounded-lg" />
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `color` | `string` | `—` | Overrides the theme --primary for the product. |
+| `className` | `string` | `—` | Classes for the wrapper element (set its height here). |
+| `theme` | `"auto" \| "light" \| "dark"` | `"auto"` | Color source. auto reads the live shadcn theme. |

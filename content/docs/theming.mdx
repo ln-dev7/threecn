@@ -1,0 +1,103 @@
+---
+title: Theming
+description: How useShadcnTheme bridges your CSS variables into Three.js.
+---
+
+Every scene colors its materials through one hook: `useShadcnTheme()`. It reads
+your shadcn CSS variables, converts them to `THREE.Color` instances, and keeps
+them in sync as the theme changes.
+
+## How it works
+
+```ts
+"use client"
+
+import * as React from "react"
+import { Color } from "three"
+
+export function useShadcnTheme(mode = "auto") {
+  const [colors, setColors] = React.useState(createDefaults)
+
+  React.useEffect(() => {
+    // 1. Read CSS variables from <html>.
+    const read = () => {
+      const styles = getComputedStyle(document.documentElement)
+      const primary = styles.getPropertyValue("--primary") // "263 70% 50%"
+      // 2. Parse "H S% L%" into a THREE.Color.
+      const [h, s, l] = primary.trim().split(/\s+/)
+      const color = new Color().setHSL(
+        parseFloat(h) / 360,
+        parseFloat(s) / 100,
+        parseFloat(l) / 100
+      )
+      setColors((prev) => ({ ...prev, primaryColor: color }))
+    }
+
+    read()
+
+    // 3. Re-read whenever the .dark class (or styles) change.
+    const observer = new MutationObserver(read)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "style", "data-theme"],
+    })
+    return () => observer.disconnect()
+  }, [mode])
+
+  return colors
+}
+```
+
+The real hook also exposes `bgColor`, `foregroundColor`, `borderColor`,
+`mutedColor`, `accentColor`, `primaryForegroundColor` and an `isDark` boolean,
+and is **SSR-safe** (it returns neutral defaults before the DOM exists).
+
+## What it returns
+
+```ts
+const {
+  primaryColor, // THREE.Color from --primary
+  bgColor, // --background
+  borderColor, // --border
+  mutedColor, // --muted-foreground
+  accentColor, // --accent
+  isDark, // true when <html> has the .dark class
+} = useShadcnTheme()
+```
+
+## Dark mode
+
+Because the hook watches the `.dark` class, it works out of the box with
+[next-themes](https://github.com/pacocoursey/next-themes). Toggle the theme and
+every mounted scene re-reads its colors on the next frame — no remount, no prop
+changes.
+
+## Overriding colors per scene
+
+Two ways to deviate from the live theme:
+
+**Force a mode** with the `theme` prop:
+
+```tsx
+<ParticleField theme="dark" /> // always dark palette
+<ParticleField theme="light" /> // always light palette
+<ParticleField theme="auto" /> // follow the document (default)
+```
+
+**Override a specific color** — some scenes accept an explicit color that wins
+over the token:
+
+```tsx
+<ProductShowcase color="#22d3ee" />
+```
+
+## Changing tokens at runtime
+
+Since the hook reads live CSS variables, setting one updates every scene:
+
+```ts
+document.documentElement.style.setProperty("--primary", "160 84% 39%")
+// all scenes turn emerald on the next frame
+```
+
+This is exactly how the accent picker on the landing page works.
