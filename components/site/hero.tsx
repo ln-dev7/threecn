@@ -1,30 +1,22 @@
 "use client"
 
-import dynamic from "next/dynamic"
 import Link from "next/link"
 import { IconArrowRight, IconBrandGithub } from "@tabler/icons-react"
 
 import { Button } from "@/components/ui/button"
 import { CodePreview } from "@/components/site/code-preview"
+import { DotField } from "@/components/site/dot-field"
 import { installCommand } from "@/lib/scenes"
-
-const ParticleField = dynamic(
-  () =>
-    import("@/components/threecn/particle-field").then((m) => m.ParticleField),
-  { ssr: false }
-)
 
 const GITHUB_URL = "https://github.com/ln-dev7/threecn"
 
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden">
-      {/* live, theme-aware particle field */}
-      <div className="absolute inset-0 -z-10">
-        <ParticleField count={1800} speed={0.4} className="h-full w-full" />
-      </div>
+      {/* cursor-reactive, theme-aware dot field */}
+      <DotField className="-z-10" />
       {/* legibility mask */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/40 via-background/70 to-background" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/30 via-background/60 to-background" />
 
       <div className="mx-auto flex max-w-3xl flex-col items-center px-5 pt-28 pb-24 text-center sm:pt-36 sm:pb-32">
         <Link
