@@ -1,7 +1,9 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import {
+  IconArrowsMaximize,
   IconCheck,
   IconCode,
   IconCopy,
@@ -13,6 +15,16 @@ import {
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { Slider } from "@/components/ui/slider"
+import { Switch } from "@/components/ui/switch"
+import { Input } from "@/components/ui/input"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { PropTable } from "@/components/site/prop-table"
 import { CliTabs } from "@/components/site/cli-tabs"
 import { SceneBySlug, type SceneSlug } from "@/components/threecn/scene-by-slug"
@@ -35,8 +47,7 @@ function generateUsage(
 ) {
   const lines: string[] = []
   for (const control of controls) {
-    const raw = props[control.prop]
-    const formatted = formatValue(raw)
+    const formatted = formatValue(props[control.prop])
     if (formatted === null) continue
     lines.push(formatted === "" ? control.prop : `${control.prop}=${formatted}`)
   }
@@ -80,7 +91,7 @@ ${propData.map((p) => `| ${p.name} | ${p.type} | ${p.default || "—"} | ${p.des
 - Set the height on the wrapper through \`className\`.`
 }
 
-/* ── controls ────────────────────────────────────────────────────────────── */
+/* ── a single control ────────────────────────────────────────────────────── */
 
 function ControlField({
   control,
@@ -91,98 +102,91 @@ function ControlField({
   value: unknown
   onChange: (next: unknown) => void
 }) {
+  const labelRow = (right?: React.ReactNode) => (
+    <div className="flex items-center justify-between gap-2">
+      <span className="text-sm text-muted-foreground">{control.label}</span>
+      {right}
+    </div>
+  )
+
   if (control.kind === "slider") {
     return (
-      <label className="flex flex-col gap-1.5">
-        <span className="flex items-center justify-between text-xs text-muted-foreground">
-          <span>{control.label}</span>
-          <span className="font-mono text-foreground">
+      <div className="flex flex-col gap-2 rounded-xl border border-border bg-card p-3">
+        {labelRow(
+          <span className="font-mono text-sm text-foreground">
             {String(value)}
             {control.unit ?? ""}
           </span>
-        </span>
-        <input
-          type="range"
+        )}
+        <Slider
           min={control.min}
           max={control.max}
           step={control.step}
           value={Number(value)}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="accent-primary"
+          onValueChange={(v) => onChange(Array.isArray(v) ? v[0] : v)}
         />
-      </label>
+      </div>
     )
   }
 
   if (control.kind === "select") {
     return (
-      <label className="flex flex-col gap-1.5">
-        <span className="text-xs text-muted-foreground">{control.label}</span>
-        <select
+      <div className="flex flex-col gap-2 rounded-xl border border-border bg-card p-3">
+        <span className="text-sm text-muted-foreground">{control.label}</span>
+        <Select
+          items={control.options}
           value={String(value)}
-          onChange={(e) => onChange(e.target.value)}
-          className="h-9 rounded-lg border border-border bg-background px-2 text-sm outline-none focus-visible:border-ring"
+          onValueChange={(v) => onChange(v)}
         >
-          {control.options.map((o) => (
-            <option key={o.value} value={o.value}>
-              {o.label}
-            </option>
-          ))}
-        </select>
-      </label>
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {control.options.map((o) => (
+              <SelectItem key={o.value} value={o.value}>
+                {o.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
     )
   }
 
   if (control.kind === "switch") {
     return (
-      <label className="flex items-center justify-between gap-3">
-        <span className="text-xs text-muted-foreground">{control.label}</span>
-        <button
-          type="button"
-          role="switch"
-          aria-checked={Boolean(value)}
-          onClick={() => onChange(!value)}
-          className={cn(
-            "relative h-5 w-9 rounded-full transition-colors",
-            value ? "bg-primary" : "bg-muted"
-          )}
-        >
-          <span
-            className={cn(
-              "absolute top-0.5 size-4 rounded-full bg-background transition-transform",
-              value ? "translate-x-4" : "translate-x-0.5"
-            )}
+      <div className="rounded-xl border border-border bg-card p-3">
+        {labelRow(
+          <Switch
+            checked={Boolean(value)}
+            onCheckedChange={(c) => onChange(c)}
           />
-        </button>
-      </label>
+        )}
+      </div>
     )
   }
 
   if (control.kind === "color") {
     return (
-      <label className="flex items-center justify-between gap-3">
-        <span className="text-xs text-muted-foreground">{control.label}</span>
-        <input
-          type="color"
-          value={String(value)}
-          onChange={(e) => onChange(e.target.value)}
-          className="h-8 w-12 cursor-pointer rounded border border-border bg-transparent"
-        />
-      </label>
+      <div className="rounded-xl border border-border bg-card p-3">
+        {labelRow(
+          <input
+            type="color"
+            value={String(value)}
+            onChange={(e) => onChange(e.target.value)}
+            className="h-7 w-10 cursor-pointer rounded border border-border bg-transparent"
+          />
+        )}
+      </div>
     )
   }
 
   // text
   return (
-    <label className="flex flex-col gap-1.5">
-      <span className="text-xs text-muted-foreground">{control.label}</span>
-      <input
-        type="text"
-        value={String(value)}
-        onChange={(e) => onChange(e.target.value)}
-        className="h-9 rounded-lg border border-border bg-background px-2 text-sm outline-none focus-visible:border-ring"
-      />
-    </label>
+    <div className="flex flex-col gap-2 rounded-xl border border-border bg-card p-3">
+      <span className="text-sm text-muted-foreground">{control.label}</span>
+      <Input value={String(value)} onChange={(e) => onChange(e.target.value)} />
+    </div>
   )
 }
 
@@ -194,12 +198,32 @@ export function ScenePlayground({ slug }: { slug: string }) {
   const meta = getScene(slug)
 
   const [tab, setTab] = React.useState<"preview" | "code">("preview")
-  const [props, setProps] = React.useState<Record<string, unknown>>(
-    () => ({ ...config.defaults })
-  )
+  const [props, setProps] = React.useState<Record<string, unknown>>(() => ({
+    ...config.defaults,
+  }))
   const [replayKey, setReplayKey] = React.useState(0)
   const [copiedPrompt, setCopiedPrompt] = React.useState(false)
   const [copiedCode, setCopiedCode] = React.useState(false)
+  const [copiedSource, setCopiedSource] = React.useState(false)
+  const [source, setSource] = React.useState<string | null>(null)
+
+  // Lazy-load the full component source from the published registry item,
+  // so the docs always show exactly what the CLI installs.
+  React.useEffect(() => {
+    if (tab !== "code" || source !== null) return
+    let active = true
+    fetch(`/r/${slug}.json`)
+      .then((r) => r.json())
+      .then((json: { files?: { path?: string; content?: string }[] }) => {
+        if (!active) return
+        const file = json.files?.find((f) => f.path?.endsWith(`${slug}.tsx`))
+        setSource(file?.content ?? "// Source unavailable.")
+      })
+      .catch(() => active && setSource("// Source unavailable."))
+    return () => {
+      active = false
+    }
+  }, [tab, source, slug])
 
   if (!config || !meta) return null
 
@@ -226,6 +250,12 @@ export function ScenePlayground({ slug }: { slug: string }) {
     await navigator.clipboard.writeText(usage).catch(() => {})
     setCopiedCode(true)
     setTimeout(() => setCopiedCode(false), 1600)
+  }
+  const copySource = async () => {
+    if (!source) return
+    await navigator.clipboard.writeText(source).catch(() => {})
+    setCopiedSource(true)
+    setTimeout(() => setCopiedSource(false), 1600)
   }
 
   const tabBtn = (key: "preview" | "code", label: string, Icon: typeof IconEye) => (
@@ -257,6 +287,16 @@ export function ScenePlayground({ slug }: { slug: string }) {
               <IconRefresh className="size-4" /> Reset
             </Button>
           )}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="rounded-lg"
+            render={
+              <Link href={`/preview/${slug}`} target="_blank" rel="noreferrer">
+                <IconArrowsMaximize className="size-4" /> Fullscreen
+              </Link>
+            }
+          />
           <Button variant="outline" size="sm" className="rounded-lg" onClick={copyPrompt}>
             {copiedPrompt ? (
               <IconCheck className="size-4 text-primary" />
@@ -269,8 +309,8 @@ export function ScenePlayground({ slug }: { slug: string }) {
       </div>
 
       {tab === "preview" ? (
-        <div className="grid gap-4 lg:grid-cols-[1fr_260px]">
-          <div className="relative h-[360px] overflow-hidden rounded-xl border border-border bg-muted/20">
+        <>
+          <div className="relative h-[380px] overflow-hidden rounded-xl border border-border bg-muted/20">
             <button
               type="button"
               onClick={() => setReplayKey((k) => k + 1)}
@@ -286,20 +326,22 @@ export function ScenePlayground({ slug }: { slug: string }) {
               props={props}
             />
           </div>
-          <div className="flex flex-col gap-4 rounded-xl border border-border p-4">
-            <p className="text-xs font-medium tracking-wide text-muted-foreground">
-              Customize
-            </p>
-            {config.controls.map((c) => (
-              <ControlField
-                key={c.prop}
-                control={c}
-                value={props[c.prop]}
-                onChange={(v) => setProp(c.prop, v)}
-              />
-            ))}
+
+          {/* Customize — full width, below the preview */}
+          <div className="mt-6">
+            <h3 className="mb-3 text-lg font-semibold tracking-tight">Customize</h3>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {config.controls.map((c) => (
+                <ControlField
+                  key={c.prop}
+                  control={c}
+                  value={props[c.prop]}
+                  onChange={(v) => setProp(c.prop, v)}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        </>
       ) : (
         <div className="flex flex-col gap-4">
           <CliTabs url={url} />
@@ -325,6 +367,33 @@ export function ScenePlayground({ slug }: { slug: string }) {
               </code>
             </pre>
           </div>
+
+          {/* Full component source */}
+          <div className="overflow-hidden rounded-xl border border-border bg-muted/40">
+            <div className="flex items-center justify-between border-b border-border/70 px-4 py-2">
+              <span className="font-mono text-xs text-muted-foreground">
+                components/threecn/{slug}.tsx
+              </span>
+              <button
+                type="button"
+                onClick={copySource}
+                aria-label="Copy source"
+                className="rounded-md p-1 text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {copiedSource ? (
+                  <IconCheck className="size-4 text-primary" />
+                ) : (
+                  <IconCopy className="size-4" />
+                )}
+              </button>
+            </div>
+            <pre className="max-h-[460px] overflow-auto p-4">
+              <code className="font-mono text-xs whitespace-pre text-foreground/90">
+                {source ?? "Loading source…"}
+              </code>
+            </pre>
+          </div>
+
           <p className="text-xs text-muted-foreground">
             Dependencies: {config.dependencies.join(", ")}
           </p>
