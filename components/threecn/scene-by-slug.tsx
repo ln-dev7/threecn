@@ -12,7 +12,10 @@ import type { ProductShowcaseProps } from "@/components/threecn/product-showcase
 import type { SceneContainerProps } from "@/components/threecn/scene-container"
 import type { GlobeProps } from "@/components/threecn/globe"
 import type { WaveTerrainProps } from "@/components/threecn/wave-terrain"
-import type { FloatingShapesProps } from "@/components/threecn/floating-shapes"
+import type { CrystalProps } from "@/components/threecn/crystal"
+import type { HaloProps } from "@/components/threecn/halo"
+import type { DnaHelixProps } from "@/components/threecn/dna-helix"
+import type { VortexProps } from "@/components/threecn/vortex"
 
 function Loading() {
   return (
@@ -23,16 +26,20 @@ function Loading() {
 }
 
 const ParticleField = dynamic(
-  () => import("@/components/threecn/particle-field").then((m) => m.ParticleField),
+  () =>
+    import("@/components/threecn/particle-field").then((m) => m.ParticleField),
   { ssr: false, loading: Loading }
 )
 const ProductViewer = dynamic(
-  () => import("@/components/threecn/product-viewer").then((m) => m.ProductViewer),
+  () =>
+    import("@/components/threecn/product-viewer").then((m) => m.ProductViewer),
   { ssr: false, loading: Loading }
 )
 const FloatingCard3D = dynamic(
   () =>
-    import("@/components/threecn/floating-card-3d").then((m) => m.FloatingCard3D),
+    import("@/components/threecn/floating-card-3d").then(
+      (m) => m.FloatingCard3D
+    ),
   { ssr: false, loading: Loading }
 )
 const Text3D = dynamic(
@@ -41,12 +48,16 @@ const Text3D = dynamic(
 )
 const ProductShowcase = dynamic(
   () =>
-    import("@/components/threecn/product-showcase").then((m) => m.ProductShowcase),
+    import("@/components/threecn/product-showcase").then(
+      (m) => m.ProductShowcase
+    ),
   { ssr: false, loading: Loading }
 )
 const SceneContainer = dynamic(
   () =>
-    import("@/components/threecn/scene-container").then((m) => m.SceneContainer),
+    import("@/components/threecn/scene-container").then(
+      (m) => m.SceneContainer
+    ),
   { ssr: false, loading: Loading }
 )
 const Globe = dynamic(
@@ -57,12 +68,22 @@ const WaveTerrain = dynamic(
   () => import("@/components/threecn/wave-terrain").then((m) => m.WaveTerrain),
   { ssr: false, loading: Loading }
 )
-const FloatingShapes = dynamic(
-  () =>
-    import("@/components/threecn/floating-shapes").then((m) => m.FloatingShapes),
+const Crystal = dynamic(
+  () => import("@/components/threecn/crystal").then((m) => m.Crystal),
   { ssr: false, loading: Loading }
 )
-
+const Halo = dynamic(
+  () => import("@/components/threecn/halo").then((m) => m.Halo),
+  { ssr: false, loading: Loading }
+)
+const DnaHelix = dynamic(
+  () => import("@/components/threecn/dna-helix").then((m) => m.DnaHelix),
+  { ssr: false, loading: Loading }
+)
+const Vortex = dynamic(
+  () => import("@/components/threecn/vortex").then((m) => m.Vortex),
+  { ssr: false, loading: Loading }
+)
 export type SceneSlug =
   | "scene-container"
   | "particle-field"
@@ -72,7 +93,10 @@ export type SceneSlug =
   | "product-showcase"
   | "globe"
   | "wave-terrain"
-  | "floating-shapes"
+  | "crystal"
+  | "halo"
+  | "dna-helix"
+  | "vortex"
 
 export function SceneBySlug({
   slug,
@@ -105,19 +129,22 @@ export function SceneBySlug({
       )
     case "text-3d":
       return (
-        <Text3D {...({ text: "threecn", size: 0.9, ...shared } as Text3DProps)} />
+        <Text3D
+          {...({ text: "threecn", size: 0.9, ...shared } as Text3DProps)}
+        />
       )
     case "product-showcase":
       return <ProductShowcase {...(shared as ProductShowcaseProps)} />
     case "scene-container":
       return (
-        <SceneContainer
-          environment="dawn"
-          {...(shared as SceneContainerProps)}
-        >
+        <SceneContainer environment="dawn" {...(shared as SceneContainerProps)}>
           <mesh rotation={[0.4, 0.4, 0]}>
             <icosahedronGeometry args={[1.6, 0]} />
-            <meshStandardMaterial color="#7c3aed" metalness={0.6} roughness={0.25} />
+            <meshStandardMaterial
+              color="#7c3aed"
+              metalness={0.6}
+              roughness={0.25}
+            />
           </mesh>
         </SceneContainer>
       )
@@ -125,8 +152,14 @@ export function SceneBySlug({
       return <Globe {...(shared as GlobeProps)} />
     case "wave-terrain":
       return <WaveTerrain {...(shared as WaveTerrainProps)} />
-    case "floating-shapes":
-      return <FloatingShapes {...(shared as FloatingShapesProps)} />
+    case "crystal":
+      return <Crystal {...(shared as CrystalProps)} />
+    case "halo":
+      return <Halo {...(shared as HaloProps)} />
+    case "dna-helix":
+      return <DnaHelix {...(shared as DnaHelixProps)} />
+    case "vortex":
+      return <Vortex {...(shared as VortexProps)} />
     default:
       return null
   }

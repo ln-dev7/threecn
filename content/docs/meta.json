@@ -13,6 +13,9 @@
     "scenes/product-showcase",
     "scenes/globe",
     "scenes/wave-terrain",
-    "scenes/floating-shapes"
+    "scenes/crystal",
+    "scenes/halo",
+    "scenes/dna-helix",
+    "scenes/vortex"
   ]
 }

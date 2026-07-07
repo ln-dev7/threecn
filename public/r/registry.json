@@ -133,8 +133,14 @@
       "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
       "files": [
         { "path": "components/threecn/globe.tsx", "type": "registry:ui" },
-        { "path": "components/threecn/scene-container.tsx", "type": "registry:ui" },
-        { "path": "components/hooks/use-shadcn-theme.ts", "type": "registry:hook" }
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
       ]
     },
     {
@@ -144,21 +150,90 @@
       "description": "An undulating wireframe terrain in perspective, drawn with --primary.",
       "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
       "files": [
-        { "path": "components/threecn/wave-terrain.tsx", "type": "registry:ui" },
-        { "path": "components/threecn/scene-container.tsx", "type": "registry:ui" },
-        { "path": "components/hooks/use-shadcn-theme.ts", "type": "registry:hook" }
+        {
+          "path": "components/threecn/wave-terrain.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
       ]
     },
     {
-      "name": "floating-shapes",
+      "name": "crystal",
       "type": "registry:ui",
-      "title": "FloatingShapes",
-      "description": "A drifting cluster of low-poly shapes that float and react to the pointer.",
+      "title": "Crystal",
+      "description": "A faceted glass gem with real refraction and a glowing core, tinted with --primary.",
       "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
       "files": [
-        { "path": "components/threecn/floating-shapes.tsx", "type": "registry:ui" },
-        { "path": "components/threecn/scene-container.tsx", "type": "registry:ui" },
-        { "path": "components/hooks/use-shadcn-theme.ts", "type": "registry:hook" }
+        { "path": "components/threecn/crystal.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "halo",
+      "type": "registry:ui",
+      "title": "Halo",
+      "description": "A glowing energy core wrapped by tilted orbit rings carrying satellites.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        { "path": "components/threecn/halo.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "dna-helix",
+      "type": "registry:ui",
+      "title": "DnaHelix",
+      "description": "A rotating double helix of spheres joined by rungs, colored with --primary and --accent.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        { "path": "components/threecn/dna-helix.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "vortex",
+      "type": "registry:ui",
+      "title": "Vortex",
+      "description": "A spiral galaxy of points fading from --primary at the core to --muted-foreground at the rim.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        { "path": "components/threecn/vortex.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
       ]
     }
   ]
