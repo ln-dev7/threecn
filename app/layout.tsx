@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { RootProvider } from "fumadocs-ui/provider/next"
+import { Analytics } from "@vercel/analytics/next"
 
 import "./globals.css"
 import { cn } from "@/lib/utils"
@@ -110,6 +111,7 @@ export default function RootLayout({
           <ThemeHotkey />
           {children}
         </RootProvider>
+        <Analytics />
       </body>
     </html>
   )
