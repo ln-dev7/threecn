@@ -4,6 +4,7 @@ import { IconBrandGithub } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/shared/logo"
 import { ThemeToggle } from "@/components/shared/theme-toggle"
+import { PackageManagerSelect } from "@/components/shared/package-manager-select"
 
 const GITHUB_URL = "https://github.com/ln-dev7/threecn"
 
@@ -34,6 +35,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-1.5">
+          <PackageManagerSelect className="hidden h-9 w-[104px] font-mono text-xs sm:flex" />
           <ThemeToggle />
           <Button
             size="icon"

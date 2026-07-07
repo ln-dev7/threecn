@@ -6,16 +6,16 @@ import { IconArrowRight, IconBrandGithub } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { CodePreview } from "@/components/site/code-preview"
 import { DotField } from "@/components/site/dot-field"
-import { installCommand } from "@/lib/scenes"
+import { REGISTRY_BASE } from "@/lib/scenes"
+import { commandFor, usePackageManager } from "@/lib/package-manager"
 
 const GITHUB_URL = "https://github.com/ln-dev7/threecn"
 
 export function Hero() {
+  const { manager } = usePackageManager()
   return (
     <section className="relative isolate overflow-hidden">
-      {/* cursor-reactive, theme-aware dot field */}
       <DotField className="-z-10" />
-      {/* legibility mask */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/30 via-background/60 to-background" />
 
       <div className="mx-auto flex max-w-3xl flex-col items-center px-5 pt-28 pb-24 text-center sm:pt-36 sm:pb-32">
@@ -27,13 +27,13 @@ export function Hero() {
           Theme-aware R3F scenes · v1
         </Link>
 
-        <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
+        <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
           3D scenes for shadcn/ui.
           <br />
           <span className="text-primary">One command away.</span>
         </h1>
 
-        <p className="mt-6 max-w-xl text-pretty text-base text-muted-foreground sm:text-lg">
+        <p className="mt-6 max-w-xl text-base text-pretty text-muted-foreground sm:text-lg">
           Copy-paste React Three Fiber scenes that auto-adapt to your shadcn
           theme. Dark mode included. Zero Three.js expertise required.
         </p>
@@ -64,7 +64,7 @@ export function Hero() {
 
         <CodePreview
           command
-          code={installCommand("particle-field")}
+          code={commandFor(manager, `${REGISTRY_BASE}/particle-field.json`)}
           className="mt-10 w-full max-w-xl bg-background/60 backdrop-blur"
         />
       </div>

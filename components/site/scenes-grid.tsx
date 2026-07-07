@@ -1,13 +1,19 @@
 "use client"
 
 import Link from "next/link"
-import { IconArrowsMaximize, IconArrowUpRight, IconBook2 } from "@tabler/icons-react"
+import {
+  IconArrowsMaximize,
+  IconArrowUpRight,
+  IconBook2,
+} from "@tabler/icons-react"
 
-import { SCENES, installCommand } from "@/lib/scenes"
+import { SCENES, REGISTRY_BASE } from "@/lib/scenes"
 import { SceneBySlug, type SceneSlug } from "@/components/threecn/scene-by-slug"
 import { CodePreview } from "@/components/site/code-preview"
+import { commandFor, usePackageManager } from "@/lib/package-manager"
 
 export function ScenesGrid() {
+  const { manager } = usePackageManager()
   return (
     <section id="scenes" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24">
       <div className="mb-12 max-w-2xl">
@@ -30,7 +36,10 @@ export function ScenesGrid() {
             className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5"
           >
             <div className="relative h-44 border-b border-border bg-muted/30">
-              <SceneBySlug slug={scene.slug as SceneSlug} className="h-full w-full" />
+              <SceneBySlug
+                slug={scene.slug as SceneSlug}
+                className="h-full w-full"
+              />
               <div className="absolute top-2 right-2 flex gap-1.5 opacity-0 transition-opacity group-hover:opacity-100">
                 <Link
                   href={`/docs/scenes/${scene.slug}`}
@@ -64,7 +73,10 @@ export function ScenesGrid() {
               </div>
               <CodePreview
                 command
-                code={installCommand(scene.slug)}
+                code={commandFor(
+                  manager,
+                  `${REGISTRY_BASE}/${scene.slug}.json`
+                )}
                 className="mt-auto text-xs"
               />
             </div>
