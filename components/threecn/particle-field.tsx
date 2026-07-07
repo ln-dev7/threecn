@@ -16,6 +16,7 @@ import {
 type ParticlesProps = {
   count: number
   speed: number
+  size: number
   theme: ThemeMode
 }
 
@@ -45,7 +46,7 @@ function seedParticles(count: number): ParticleData {
   return { positions, speeds, isPrimary }
 }
 
-function Particles({ count, speed, theme }: ParticlesProps) {
+function Particles({ count, speed, size, theme }: ParticlesProps) {
   const pointsRef = React.useRef<THREE.Points>(null)
   const materialRef = React.useRef<THREE.PointsMaterial>(null)
   const { primaryColor, mutedColor } = useShadcnTheme(theme)
@@ -96,7 +97,7 @@ function Particles({ count, speed, theme }: ParticlesProps) {
       <pointsMaterial
         ref={materialRef}
         vertexColors
-        size={0.045}
+        size={size}
         sizeAttenuation
         transparent
         opacity={0.65}
@@ -110,6 +111,8 @@ function Particles({ count, speed, theme }: ParticlesProps) {
 export type ParticleFieldProps = {
   count?: number
   speed?: number
+  /** Particle size. */
+  size?: number
   className?: string
   theme?: ThemeMode
   environment?: SceneContainerProps["environment"]
@@ -122,6 +125,7 @@ export type ParticleFieldProps = {
 export function ParticleField({
   count = 1500,
   speed = 0.3,
+  size = 0.045,
   className,
   theme = "auto",
   environment = "night",
@@ -133,7 +137,7 @@ export function ParticleField({
       environment={environment}
       camera={[0, 0, 12]}
     >
-      <Particles count={count} speed={speed} theme={theme} />
+      <Particles count={count} speed={speed} size={size} theme={theme} />
     </SceneContainer>
   )
 }

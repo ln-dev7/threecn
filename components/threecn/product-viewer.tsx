@@ -17,10 +17,18 @@ import {
 type ProductProps = {
   autoRotate: boolean
   autoRotateSpeed: number
+  metalness: number
+  roughness: number
   theme: ThemeMode
 }
 
-function Product({ autoRotate, autoRotateSpeed, theme }: ProductProps) {
+function Product({
+  autoRotate,
+  autoRotateSpeed,
+  metalness,
+  roughness,
+  theme,
+}: ProductProps) {
   const groupRef = React.useRef<THREE.Group>(null)
   const matRef = React.useRef<THREE.MeshStandardMaterial>(null)
   const [hovered, setHovered] = React.useState(false)
@@ -52,8 +60,8 @@ function Product({ autoRotate, autoRotateSpeed, theme }: ProductProps) {
           color={accentColor}
           emissive={primaryColor}
           emissiveIntensity={hovered ? 0.55 : 0.3}
-          metalness={0.65}
-          roughness={0.22}
+          metalness={metalness}
+          roughness={roughness}
         />
       </RoundedBox>
       {/* subtle inner accent edge */}
@@ -74,6 +82,10 @@ function Product({ autoRotate, autoRotateSpeed, theme }: ProductProps) {
 export type ProductViewerProps = {
   autoRotate?: boolean
   autoRotateSpeed?: number
+  /** Material metalness (0–1). */
+  metalness?: number
+  /** Material roughness (0–1). */
+  roughness?: number
   className?: string
   theme?: ThemeMode
   environment?: SceneContainerProps["environment"]
@@ -87,6 +99,8 @@ export type ProductViewerProps = {
 export function ProductViewer({
   autoRotate = true,
   autoRotateSpeed = 1,
+  metalness = 0.65,
+  roughness = 0.22,
   className,
   theme = "auto",
   environment = "studio",
@@ -98,10 +112,13 @@ export function ProductViewer({
       environment={environment}
       camera={[3, 2, 5]}
       fov={40}
+      orbit={false}
     >
       <Product
         autoRotate={autoRotate}
         autoRotateSpeed={autoRotateSpeed}
+        metalness={metalness}
+        roughness={roughness}
         theme={theme}
       />
       <OrbitControls

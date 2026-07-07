@@ -31,10 +31,12 @@ function fibonacciSphere(count: number, radius: number) {
 function GlobeMesh({
   dots,
   speed,
+  size,
   theme,
 }: {
   dots: number
   speed: number
+  size: number
   theme: ThemeMode
 }) {
   const groupRef = React.useRef<THREE.Group>(null)
@@ -54,7 +56,7 @@ function GlobeMesh({
         </bufferGeometry>
         <pointsMaterial
           color={primaryColor}
-          size={0.035}
+          size={size}
           sizeAttenuation
           transparent
           opacity={0.9}
@@ -85,6 +87,8 @@ export type GlobeProps = {
   dots?: number
   /** Rotation speed multiplier. */
   speed?: number
+  /** Dot size. */
+  size?: number
   className?: string
   theme?: ThemeMode
   environment?: SceneContainerProps["environment"]
@@ -97,6 +101,7 @@ export type GlobeProps = {
 export function Globe({
   dots = 1800,
   speed = 0.3,
+  size = 0.035,
   className,
   theme = "auto",
   environment = "night",
@@ -109,7 +114,7 @@ export function Globe({
       camera={[0, 0, 6]}
       fov={42}
     >
-      <GlobeMesh dots={dots} speed={speed} theme={theme} />
+      <GlobeMesh dots={dots} speed={speed} size={size} theme={theme} />
     </SceneContainer>
   )
 }

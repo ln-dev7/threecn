@@ -13,10 +13,12 @@ import {
 
 type ShowcaseProps = {
   color?: string
+  metalness: number
+  roughness: number
   theme: ThemeMode
 }
 
-function Showcase({ color, theme }: ShowcaseProps) {
+function Showcase({ color, metalness, roughness, theme }: ShowcaseProps) {
   const groupRef = React.useRef<THREE.Group>(null)
   const { primaryColor, accentColor, mutedColor, foregroundColor } =
     useShadcnTheme(theme)
@@ -51,8 +53,8 @@ function Showcase({ color, theme }: ShowcaseProps) {
               color={productColor}
               emissive={productColor}
               emissiveIntensity={0.22}
-              metalness={0.8}
-              roughness={0.18}
+              metalness={metalness}
+              roughness={roughness}
             />
           </mesh>
           <mesh castShadow position={[0, 0, 0]}>
@@ -82,6 +84,10 @@ function Showcase({ color, theme }: ShowcaseProps) {
 export type ProductShowcaseProps = {
   /** Overrides the theme `--primary` color for the product. */
   color?: string
+  /** Product metalness (0–1). */
+  metalness?: number
+  /** Product roughness (0–1). */
+  roughness?: number
   className?: string
   theme?: ThemeMode
 }
@@ -92,6 +98,8 @@ export type ProductShowcaseProps = {
  */
 export function ProductShowcase({
   color,
+  metalness = 0.8,
+  roughness = 0.18,
   className,
   theme = "auto",
 }: ProductShowcaseProps) {
@@ -102,8 +110,14 @@ export function ProductShowcase({
       environment="studio"
       camera={[0, 1.4, 5.5]}
       fov={42}
+      orbit={false}
     >
-      <Showcase color={color} theme={theme} />
+      <Showcase
+        color={color}
+        metalness={metalness}
+        roughness={roughness}
+        theme={theme}
+      />
       <OrbitControls
         enablePan={false}
         enableZoom={false}

@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { Canvas } from "@react-three/fiber"
+import { OrbitControls } from "@react-three/drei"
 
 import { cn } from "@/lib/utils"
 import {
@@ -97,6 +98,11 @@ export type SceneContainerProps = {
   children?: React.ReactNode
   /** Rendered as an HTML overlay above the canvas (not inside the 3D scene). */
   overlay?: React.ReactNode
+  /**
+   * Drag to orbit the camera (rotate only — zoom and pan disabled). Defaults to
+   * true. Set false if the scene provides its own controls.
+   */
+  orbit?: boolean
 }
 
 /**
@@ -113,6 +119,7 @@ export function SceneContainer({
   fov = 45,
   children,
   overlay,
+  orbit = true,
 }: SceneContainerProps) {
   return (
     <div className={cn("relative h-full w-full", className)}>
@@ -123,6 +130,15 @@ export function SceneContainer({
       >
         <Rig preset={environment} fog={fog} theme={theme} />
         <React.Suspense fallback={null}>{children}</React.Suspense>
+        {orbit ? (
+          <OrbitControls
+            makeDefault
+            enablePan={false}
+            enableZoom={false}
+            enableDamping
+            dampingFactor={0.1}
+          />
+        ) : null}
       </Canvas>
       {overlay ? <div className="pointer-events-none absolute inset-0">{overlay}</div> : null}
     </div>
