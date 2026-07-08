@@ -33,7 +33,7 @@ export function ScenesGrid() {
         {SCENES.map((scene) => (
           <div
             key={scene.slug}
-            className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5"
+            className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5"
           >
             <div className="relative h-44 border-b border-border bg-muted/30">
               <SceneBySlug
