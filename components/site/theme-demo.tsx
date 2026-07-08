@@ -69,7 +69,7 @@ export function ThemeDemo() {
         </p>
       </div>
 
-      <div className="grid gap-6 overflow-hidden rounded-2xl border border-border lg:grid-cols-[1.4fr_1fr]">
+      <div className="grid grid-cols-1 gap-6 overflow-hidden rounded-2xl border border-border lg:grid-cols-[1.4fr_1fr]">
         <div className="relative min-h-[340px] border-b border-border bg-muted/20 lg:border-r lg:border-b-0">
           <ProductShowcase className="h-full w-full" />
           <div className="absolute bottom-3 left-4">

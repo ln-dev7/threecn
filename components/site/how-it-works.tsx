@@ -46,7 +46,7 @@ export function HowItWorks() {
           </h2>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
           {steps.map((step) => (
             <div key={step.n} className="flex flex-col gap-4">
               <div className="flex items-center gap-3">
