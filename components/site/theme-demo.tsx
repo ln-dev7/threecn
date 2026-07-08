@@ -43,6 +43,11 @@ function ThemeReadout() {
 export function ThemeDemo() {
   const { resolvedTheme, setTheme } = useTheme()
   const [active, setActive] = React.useState<string | null>(null)
+  const [mounted, setMounted] = React.useState(false)
+
+  // Detect the client mount to avoid a variant hydration mismatch with next-themes.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  React.useEffect(() => setMounted(true), [])
 
   const applyColor = (hsl: string) => {
     document.documentElement.style.setProperty("--primary", hsl)
@@ -82,7 +87,9 @@ export function ThemeDemo() {
             <p className="mb-2 text-sm font-medium">Mode</p>
             <div className="flex gap-2">
               <Button
-                variant={resolvedTheme === "light" ? "default" : "outline"}
+                variant={
+                  mounted && resolvedTheme === "light" ? "default" : "outline"
+                }
                 size="sm"
                 className="rounded-lg"
                 onClick={() => setTheme("light")}
@@ -90,7 +97,9 @@ export function ThemeDemo() {
                 <IconSun className="size-4" /> Light
               </Button>
               <Button
-                variant={resolvedTheme === "dark" ? "default" : "outline"}
+                variant={
+                  mounted && resolvedTheme === "dark" ? "default" : "outline"
+                }
                 size="sm"
                 className="rounded-lg"
                 onClick={() => setTheme("dark")}

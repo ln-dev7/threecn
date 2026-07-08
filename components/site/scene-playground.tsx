@@ -291,6 +291,7 @@ export function ScenePlayground({ slug }: { slug: string }) {
             variant="ghost"
             size="sm"
             className="rounded-lg"
+            nativeButton={false}
             render={
               <Link href={`/preview/${slug}`} target="_blank" rel="noreferrer">
                 <IconArrowsMaximize className="size-4" /> Fullscreen

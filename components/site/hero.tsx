@@ -42,6 +42,7 @@ export function Hero() {
           <Button
             size="lg"
             className="rounded-lg"
+            nativeButton={false}
             render={
               <Link href="/#scenes">
                 Browse scenes
@@ -53,6 +54,7 @@ export function Hero() {
             size="lg"
             variant="outline"
             className="rounded-lg"
+            nativeButton={false}
             render={
               <a href={GITHUB_URL} target="_blank" rel="noreferrer">
                 <IconBrandGithub className="size-4" />

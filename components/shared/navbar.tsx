@@ -42,6 +42,7 @@ export function Navbar() {
             variant="ghost"
             aria-label="GitHub"
             className="md:hidden"
+            nativeButton={false}
             render={
               <a href={GITHUB_URL} target="_blank" rel="noreferrer">
                 <IconBrandGithub className="size-[1.15rem]" />
@@ -51,6 +52,7 @@ export function Navbar() {
           <Button
             size="sm"
             className="rounded-lg"
+            nativeButton={false}
             render={<Link href="/docs">Get started</Link>}
           />
         </div>
