@@ -385,6 +385,186 @@ export const SCENES: SceneMeta[] = [
       ...commonProps,
     ],
   },
+  {
+    slug: "aurora-ribbons",
+    name: "AuroraRibbons",
+    componentName: "AuroraRibbons",
+    title: "Aurora Ribbons",
+    description:
+      "Silky aurora ribbons drifting in slow sine waves, shaded from --primary to --accent.",
+    props: [
+      {
+        name: "ribbons",
+        type: "number",
+        default: "5",
+        description: "Number of ribbons.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Wave animation speed multiplier.",
+      },
+      {
+        name: "amplitude",
+        type: "number",
+        default: "0.9",
+        description: "Wave height.",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "network-graph",
+    name: "NetworkGraph",
+    componentName: "NetworkGraph",
+    title: "Network Graph",
+    description:
+      "A living plexus: drifting nodes link up when close, links fade from --primary to --muted-foreground.",
+    props: [
+      {
+        name: "nodes",
+        type: "number",
+        default: "60",
+        description: "Number of nodes.",
+      },
+      {
+        name: "linkDistance",
+        type: "number",
+        default: "1.4",
+        description: "Max distance at which two nodes get linked.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Drift and rotation speed multiplier.",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "metaballs",
+    name: "Metaballs",
+    componentName: "Metaballs",
+    title: "Metaballs",
+    description:
+      "A lava-lamp of liquid blobs that merge and split, surfaced with marching cubes and tinted --primary.",
+    props: [
+      {
+        name: "blobs",
+        type: "number",
+        default: "6",
+        description: "Number of blobs.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Animation speed multiplier.",
+      },
+      {
+        name: "resolution",
+        type: "number",
+        default: "44",
+        description: "Marching-cubes resolution (higher = smoother, heavier).",
+      },
+      {
+        name: "roughness",
+        type: "number",
+        default: "0.18",
+        description: "Surface roughness (0–1).",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "cube-wave",
+    name: "CubeWave",
+    componentName: "CubeWave",
+    title: "Cube Wave",
+    description:
+      "A grid of instanced cubes riding a radial wave, blending --accent troughs into --primary crests.",
+    props: [
+      {
+        name: "grid",
+        type: "number",
+        default: "16",
+        description: "Cubes per side (total = grid²).",
+      },
+      {
+        name: "gap",
+        type: "number",
+        default: "0.75",
+        description: "Spacing between cube centers.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Wave speed multiplier.",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "iso-city",
+    name: "IsoCity",
+    componentName: "IsoCity",
+    title: "Iso City",
+    description:
+      "A procedural isometric skyline rotating under fog; a few towers pulse with --primary.",
+    props: [
+      {
+        name: "size",
+        type: "number",
+        default: "14",
+        description: "Blocks per side of the city grid.",
+      },
+      {
+        name: "density",
+        type: "number",
+        default: "0.8",
+        description: "Chance (0–1) that a lot gets a building.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Rotation and pulse speed multiplier.",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "warp-tunnel",
+    name: "WarpTunnel",
+    componentName: "WarpTunnel",
+    title: "Warp Tunnel",
+    description:
+      "Hyperspace star streaks racing past the camera, from --foreground heads to --primary tails.",
+    props: [
+      {
+        name: "count",
+        type: "number",
+        default: "400",
+        description: "Number of star streaks.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Warp speed multiplier.",
+      },
+      {
+        name: "spread",
+        type: "number",
+        default: "7",
+        description: "Tunnel radius.",
+      },
+      ...commonProps,
+    ],
+  },
 ]
 
 export const REGISTRY_BASE = "https://threecn.dev/r"

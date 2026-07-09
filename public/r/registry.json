@@ -235,6 +235,123 @@
           "type": "registry:hook"
         }
       ]
+    },
+    {
+      "name": "aurora-ribbons",
+      "type": "registry:ui",
+      "title": "AuroraRibbons",
+      "description": "Silky aurora ribbons drifting in slow sine waves, shaded with a --primary → --accent gradient.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        {
+          "path": "components/threecn/aurora-ribbons.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "network-graph",
+      "type": "registry:ui",
+      "title": "NetworkGraph",
+      "description": "A living plexus of drifting nodes that link up when close, fading from --primary to --muted-foreground.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        {
+          "path": "components/threecn/network-graph.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "metaballs",
+      "type": "registry:ui",
+      "title": "Metaballs",
+      "description": "Liquid metaballs that merge and split as they orbit each other, tinted with --primary.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        { "path": "components/threecn/metaballs.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "cube-wave",
+      "type": "registry:ui",
+      "title": "CubeWave",
+      "description": "A grid of instanced cubes riding a radial wave, blending --accent troughs into --primary crests.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        { "path": "components/threecn/cube-wave.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "iso-city",
+      "type": "registry:ui",
+      "title": "IsoCity",
+      "description": "A procedural isometric skyline rotating under fog, with a few towers pulsing in --primary.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        { "path": "components/threecn/iso-city.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "warp-tunnel",
+      "type": "registry:ui",
+      "title": "WarpTunnel",
+      "description": "Hyperspace star streaks racing past the camera, from --foreground heads to --primary tails.",
+      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "files": [
+        {
+          "path": "components/threecn/warp-tunnel.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
     }
   ]
 }

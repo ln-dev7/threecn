@@ -16,6 +16,12 @@ import type { CrystalProps } from "@/components/threecn/crystal"
 import type { HaloProps } from "@/components/threecn/halo"
 import type { DnaHelixProps } from "@/components/threecn/dna-helix"
 import type { VortexProps } from "@/components/threecn/vortex"
+import type { AuroraRibbonsProps } from "@/components/threecn/aurora-ribbons"
+import type { NetworkGraphProps } from "@/components/threecn/network-graph"
+import type { MetaballsProps } from "@/components/threecn/metaballs"
+import type { CubeWaveProps } from "@/components/threecn/cube-wave"
+import type { IsoCityProps } from "@/components/threecn/iso-city"
+import type { WarpTunnelProps } from "@/components/threecn/warp-tunnel"
 
 function Loading() {
   return (
@@ -84,6 +90,32 @@ const Vortex = dynamic(
   () => import("@/components/threecn/vortex").then((m) => m.Vortex),
   { ssr: false, loading: Loading }
 )
+const AuroraRibbons = dynamic(
+  () =>
+    import("@/components/threecn/aurora-ribbons").then((m) => m.AuroraRibbons),
+  { ssr: false, loading: Loading }
+)
+const NetworkGraph = dynamic(
+  () =>
+    import("@/components/threecn/network-graph").then((m) => m.NetworkGraph),
+  { ssr: false, loading: Loading }
+)
+const Metaballs = dynamic(
+  () => import("@/components/threecn/metaballs").then((m) => m.Metaballs),
+  { ssr: false, loading: Loading }
+)
+const CubeWave = dynamic(
+  () => import("@/components/threecn/cube-wave").then((m) => m.CubeWave),
+  { ssr: false, loading: Loading }
+)
+const IsoCity = dynamic(
+  () => import("@/components/threecn/iso-city").then((m) => m.IsoCity),
+  { ssr: false, loading: Loading }
+)
+const WarpTunnel = dynamic(
+  () => import("@/components/threecn/warp-tunnel").then((m) => m.WarpTunnel),
+  { ssr: false, loading: Loading }
+)
 export type SceneSlug =
   | "scene-container"
   | "particle-field"
@@ -97,6 +129,12 @@ export type SceneSlug =
   | "halo"
   | "dna-helix"
   | "vortex"
+  | "aurora-ribbons"
+  | "network-graph"
+  | "metaballs"
+  | "cube-wave"
+  | "iso-city"
+  | "warp-tunnel"
 
 export function SceneBySlug({
   slug,
@@ -160,6 +198,18 @@ export function SceneBySlug({
       return <DnaHelix {...(shared as DnaHelixProps)} />
     case "vortex":
       return <Vortex {...(shared as VortexProps)} />
+    case "aurora-ribbons":
+      return <AuroraRibbons {...(shared as AuroraRibbonsProps)} />
+    case "network-graph":
+      return <NetworkGraph {...(shared as NetworkGraphProps)} />
+    case "metaballs":
+      return <Metaballs {...(shared as MetaballsProps)} />
+    case "cube-wave":
+      return <CubeWave {...(shared as CubeWaveProps)} />
+    case "iso-city":
+      return <IsoCity {...(shared as IsoCityProps)} />
+    case "warp-tunnel":
+      return <WarpTunnel {...(shared as WarpTunnelProps)} />
     default:
       return null
   }
