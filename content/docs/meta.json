@@ -4,7 +4,7 @@
     "index",
     "installation",
     "theming",
-    "---Scenes---",
+    "---Components---",
     "scenes/scene-container",
     "scenes/particle-field",
     "scenes/product-viewer",
