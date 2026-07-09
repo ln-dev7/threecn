@@ -565,12 +565,183 @@ export const SCENES: SceneMeta[] = [
       ...commonProps,
     ],
   },
+  {
+    slug: "phyllotaxis",
+    name: "Phyllotaxis",
+    componentName: "Phyllotaxis",
+    title: "Phyllotaxis",
+    description:
+      "A sunflower-style bloom of instanced petals placed by the golden angle, breathing from --primary at the core to --accent at the rim.",
+    props: [
+      {
+        name: "count",
+        type: "number",
+        default: "520",
+        description: "Number of petals on the spiral.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Breathing and rotation speed multiplier.",
+      },
+      {
+        name: "spread",
+        type: "number",
+        default: "3.2",
+        description: "Radius of the bloom.",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "strange-attractor",
+    name: "StrangeAttractor",
+    componentName: "StrangeAttractor",
+    title: "Strange Attractor",
+    description:
+      "The Aizawa attractor integrated live into one glowing orbit that never repeats, colored --primary to --accent with a sweeping head.",
+    props: [
+      {
+        name: "points",
+        type: "number",
+        default: "6000",
+        description: "Integration steps traced (path detail).",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Rotation and head speed multiplier.",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "boids",
+    name: "Boids",
+    componentName: "Boids",
+    title: "Boids",
+    description:
+      "A living flock steering by separation, alignment and cohesion; each agent tints --accent when slow to --primary at full speed.",
+    props: [
+      {
+        name: "count",
+        type: "number",
+        default: "170",
+        description: "Number of agents in the flock.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Flight speed multiplier.",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "curl-flow",
+    name: "CurlFlow",
+    componentName: "CurlFlow",
+    title: "Curl Flow",
+    description:
+      "Particles advected through a divergence-free curl-noise field into silky filaments, tinted --accent to --primary by height.",
+    props: [
+      {
+        name: "count",
+        type: "number",
+        default: "2400",
+        description: "Number of flowing particles.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Flow speed multiplier.",
+      },
+      {
+        name: "size",
+        type: "number",
+        default: "0.04",
+        description: "Particle size.",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "cloth",
+    name: "Cloth",
+    componentName: "Cloth",
+    title: "Cloth",
+    description:
+      "A real spring-mass cloth (Verlet) hanging from its top edge and rippling under procedural wind, with the theme woven --primary to --accent.",
+    props: [
+      {
+        name: "segments",
+        type: "number",
+        default: "26",
+        description: "Grid resolution per side (finer = heavier sim).",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Overall motion speed multiplier.",
+      },
+      {
+        name: "wind",
+        type: "number",
+        default: "1",
+        description: "Wind strength.",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "voronoi-shatter",
+    name: "VoronoiShatter",
+    componentName: "VoronoiShatter",
+    title: "Voronoi Shatter",
+    description:
+      "A sphere fractured into Voronoi shards that drift apart and snap back together, each facet shading --accent to --primary by height.",
+    props: [
+      {
+        name: "shards",
+        type: "number",
+        default: "26",
+        description: "Number of Voronoi fragments.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Explode/reassemble speed multiplier.",
+      },
+      {
+        name: "spread",
+        type: "number",
+        default: "0.6",
+        description: "How far the shards fly apart.",
+      },
+      ...commonProps,
+    ],
+  },
 ]
 
+/** Raw registry item URLs (used to fetch published JSON). */
 export const REGISTRY_BASE = "https://threecn.dev/r"
 
+/** Namespace threecn is published under in the shadcn registry. */
+export const REGISTRY_NAMESPACE = "@threecn"
+
+/** The shadcn CLI reference for a scene, e.g. `@threecn/particle-field`. */
+export function registryRef(slug: string) {
+  return `${REGISTRY_NAMESPACE}/${slug}`
+}
+
 export function installCommand(slug: string) {
-  return `npx shadcn add ${REGISTRY_BASE}/${slug}.json`
+  return `npx shadcn@latest add ${registryRef(slug)}`
 }
 
 export function getScene(slug: string) {

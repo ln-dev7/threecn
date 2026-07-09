@@ -22,6 +22,12 @@
     "scenes/metaballs",
     "scenes/cube-wave",
     "scenes/iso-city",
-    "scenes/warp-tunnel"
+    "scenes/warp-tunnel",
+    "scenes/phyllotaxis",
+    "scenes/strange-attractor",
+    "scenes/curl-flow",
+    "scenes/cloth",
+    "scenes/boids",
+    "scenes/voronoi-shatter"
   ]
 }

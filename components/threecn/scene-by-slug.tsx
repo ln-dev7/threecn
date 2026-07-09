@@ -22,6 +22,12 @@ import type { MetaballsProps } from "@/components/threecn/metaballs"
 import type { CubeWaveProps } from "@/components/threecn/cube-wave"
 import type { IsoCityProps } from "@/components/threecn/iso-city"
 import type { WarpTunnelProps } from "@/components/threecn/warp-tunnel"
+import type { PhyllotaxisProps } from "@/components/threecn/phyllotaxis"
+import type { StrangeAttractorProps } from "@/components/threecn/strange-attractor"
+import type { CurlFlowProps } from "@/components/threecn/curl-flow"
+import type { ClothProps } from "@/components/threecn/cloth"
+import type { BoidsProps } from "@/components/threecn/boids"
+import type { VoronoiShatterProps } from "@/components/threecn/voronoi-shatter"
 
 function Loading() {
   return (
@@ -116,6 +122,36 @@ const WarpTunnel = dynamic(
   () => import("@/components/threecn/warp-tunnel").then((m) => m.WarpTunnel),
   { ssr: false, loading: Loading }
 )
+const Phyllotaxis = dynamic(
+  () => import("@/components/threecn/phyllotaxis").then((m) => m.Phyllotaxis),
+  { ssr: false, loading: Loading }
+)
+const StrangeAttractor = dynamic(
+  () =>
+    import("@/components/threecn/strange-attractor").then(
+      (m) => m.StrangeAttractor
+    ),
+  { ssr: false, loading: Loading }
+)
+const CurlFlow = dynamic(
+  () => import("@/components/threecn/curl-flow").then((m) => m.CurlFlow),
+  { ssr: false, loading: Loading }
+)
+const Cloth = dynamic(
+  () => import("@/components/threecn/cloth").then((m) => m.Cloth),
+  { ssr: false, loading: Loading }
+)
+const Boids = dynamic(
+  () => import("@/components/threecn/boids").then((m) => m.Boids),
+  { ssr: false, loading: Loading }
+)
+const VoronoiShatter = dynamic(
+  () =>
+    import("@/components/threecn/voronoi-shatter").then(
+      (m) => m.VoronoiShatter
+    ),
+  { ssr: false, loading: Loading }
+)
 export type SceneSlug =
   | "scene-container"
   | "particle-field"
@@ -135,6 +171,12 @@ export type SceneSlug =
   | "cube-wave"
   | "iso-city"
   | "warp-tunnel"
+  | "phyllotaxis"
+  | "strange-attractor"
+  | "curl-flow"
+  | "cloth"
+  | "boids"
+  | "voronoi-shatter"
 
 export function SceneBySlug({
   slug,
@@ -210,6 +252,18 @@ export function SceneBySlug({
       return <IsoCity {...(shared as IsoCityProps)} />
     case "warp-tunnel":
       return <WarpTunnel {...(shared as WarpTunnelProps)} />
+    case "phyllotaxis":
+      return <Phyllotaxis {...(shared as PhyllotaxisProps)} />
+    case "strange-attractor":
+      return <StrangeAttractor {...(shared as StrangeAttractorProps)} />
+    case "curl-flow":
+      return <CurlFlow {...(shared as CurlFlowProps)} />
+    case "cloth":
+      return <Cloth {...(shared as ClothProps)} />
+    case "boids":
+      return <Boids {...(shared as BoidsProps)} />
+    case "voronoi-shatter":
+      return <VoronoiShatter {...(shared as VoronoiShatterProps)} />
     default:
       return null
   }

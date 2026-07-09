@@ -8,7 +8,11 @@
       "type": "registry:ui",
       "title": "SceneContainer",
       "description": "Base R3F canvas wrapper with theme-aware environment and camera setup.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
         {
           "path": "components/threecn/scene-container.tsx",
@@ -25,7 +29,11 @@
       "type": "registry:ui",
       "title": "ParticleField",
       "description": "A drifting cloud of particles colored with your shadcn --primary and --muted-foreground tokens.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
         {
           "path": "components/threecn/particle-field.tsx",
@@ -46,7 +54,11 @@
       "type": "registry:ui",
       "title": "ProductViewer",
       "description": "An orbitable, polished product volume with an emissive --primary tint; hover slows the spin.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
         {
           "path": "components/threecn/product-viewer.tsx",
@@ -67,7 +79,11 @@
       "type": "registry:ui",
       "title": "FloatingCard3D",
       "description": "A parallax-tilting 3D card with a --background surface, --border edges, and an HTML overlay.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
         {
           "path": "components/threecn/floating-card-3d.tsx",
@@ -88,7 +104,11 @@
       "type": "registry:ui",
       "title": "Text3D",
       "description": "Extruded, floating 3D text rendered with drei <Text3D>, colored with --primary.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
         {
           "path": "components/threecn/text-3d.tsx",
@@ -109,7 +129,11 @@
       "type": "registry:ui",
       "title": "ProductShowcase",
       "description": "A product on a circular pedestal with soft contact shadows, studio lighting and slow auto-rotate.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
         {
           "path": "components/threecn/product-showcase.tsx",
@@ -130,9 +154,16 @@
       "type": "registry:ui",
       "title": "Globe",
       "description": "A dotted globe rotating slowly with orbit rings, colored with your --primary token.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
-        { "path": "components/threecn/globe.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/globe.tsx",
+          "type": "registry:ui"
+        },
         {
           "path": "components/threecn/scene-container.tsx",
           "type": "registry:ui"
@@ -148,7 +179,11 @@
       "type": "registry:ui",
       "title": "WaveTerrain",
       "description": "An undulating wireframe terrain in perspective, drawn with --primary.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
         {
           "path": "components/threecn/wave-terrain.tsx",
@@ -169,9 +204,16 @@
       "type": "registry:ui",
       "title": "Crystal",
       "description": "A faceted glass gem with real refraction and a glowing core, tinted with --primary.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
-        { "path": "components/threecn/crystal.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/crystal.tsx",
+          "type": "registry:ui"
+        },
         {
           "path": "components/threecn/scene-container.tsx",
           "type": "registry:ui"
@@ -187,9 +229,16 @@
       "type": "registry:ui",
       "title": "Halo",
       "description": "A glowing energy core wrapped by tilted orbit rings carrying satellites.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
-        { "path": "components/threecn/halo.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/halo.tsx",
+          "type": "registry:ui"
+        },
         {
           "path": "components/threecn/scene-container.tsx",
           "type": "registry:ui"
@@ -205,9 +254,16 @@
       "type": "registry:ui",
       "title": "DnaHelix",
       "description": "A rotating double helix of spheres joined by rungs, colored with --primary and --accent.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
-        { "path": "components/threecn/dna-helix.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/dna-helix.tsx",
+          "type": "registry:ui"
+        },
         {
           "path": "components/threecn/scene-container.tsx",
           "type": "registry:ui"
@@ -223,9 +279,16 @@
       "type": "registry:ui",
       "title": "Vortex",
       "description": "A spiral galaxy of points fading from --primary at the core to --muted-foreground at the rim.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
-        { "path": "components/threecn/vortex.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/vortex.tsx",
+          "type": "registry:ui"
+        },
         {
           "path": "components/threecn/scene-container.tsx",
           "type": "registry:ui"
@@ -240,8 +303,12 @@
       "name": "aurora-ribbons",
       "type": "registry:ui",
       "title": "AuroraRibbons",
-      "description": "Silky aurora ribbons drifting in slow sine waves, shaded with a --primary → --accent gradient.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "description": "Silky aurora ribbons drifting in slow sine waves, shaded with a --primary \u2192 --accent gradient.",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
         {
           "path": "components/threecn/aurora-ribbons.tsx",
@@ -262,7 +329,11 @@
       "type": "registry:ui",
       "title": "NetworkGraph",
       "description": "A living plexus of drifting nodes that link up when close, fading from --primary to --muted-foreground.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
         {
           "path": "components/threecn/network-graph.tsx",
@@ -283,9 +354,16 @@
       "type": "registry:ui",
       "title": "Metaballs",
       "description": "Liquid metaballs that merge and split as they orbit each other, tinted with --primary.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
-        { "path": "components/threecn/metaballs.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/metaballs.tsx",
+          "type": "registry:ui"
+        },
         {
           "path": "components/threecn/scene-container.tsx",
           "type": "registry:ui"
@@ -301,9 +379,16 @@
       "type": "registry:ui",
       "title": "CubeWave",
       "description": "A grid of instanced cubes riding a radial wave, blending --accent troughs into --primary crests.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
-        { "path": "components/threecn/cube-wave.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/cube-wave.tsx",
+          "type": "registry:ui"
+        },
         {
           "path": "components/threecn/scene-container.tsx",
           "type": "registry:ui"
@@ -319,9 +404,16 @@
       "type": "registry:ui",
       "title": "IsoCity",
       "description": "A procedural isometric skyline rotating under fog, with a few towers pulsing in --primary.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
-        { "path": "components/threecn/iso-city.tsx", "type": "registry:ui" },
+        {
+          "path": "components/threecn/iso-city.tsx",
+          "type": "registry:ui"
+        },
         {
           "path": "components/threecn/scene-container.tsx",
           "type": "registry:ui"
@@ -337,10 +429,164 @@
       "type": "registry:ui",
       "title": "WarpTunnel",
       "description": "Hyperspace star streaks racing past the camera, from --foreground heads to --primary tails.",
-      "dependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
       "files": [
         {
           "path": "components/threecn/warp-tunnel.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "phyllotaxis",
+      "type": "registry:ui",
+      "title": "Phyllotaxis",
+      "description": "A sunflower-style bloom of instanced petals placed by the golden angle, breathing from --primary at the core to --accent at the rim.",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
+      "files": [
+        {
+          "path": "components/threecn/phyllotaxis.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "strange-attractor",
+      "type": "registry:ui",
+      "title": "StrangeAttractor",
+      "description": "The Aizawa attractor integrated live into one glowing orbit that never repeats, colored --primary to --accent with a sweeping head.",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
+      "files": [
+        {
+          "path": "components/threecn/strange-attractor.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "curl-flow",
+      "type": "registry:ui",
+      "title": "CurlFlow",
+      "description": "Particles advected through a divergence-free curl-noise field into silky filaments, tinted --accent to --primary by height.",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
+      "files": [
+        {
+          "path": "components/threecn/curl-flow.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "cloth",
+      "type": "registry:ui",
+      "title": "Cloth",
+      "description": "A real spring-mass cloth (Verlet) hanging from its top edge and rippling under procedural wind, with the theme woven --primary to --accent.",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
+      "files": [
+        {
+          "path": "components/threecn/cloth.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "boids",
+      "type": "registry:ui",
+      "title": "Boids",
+      "description": "A living flock steering by separation, alignment and cohesion; each agent tints --accent when slow to --primary at full speed.",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
+      "files": [
+        {
+          "path": "components/threecn/boids.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "voronoi-shatter",
+      "type": "registry:ui",
+      "title": "VoronoiShatter",
+      "description": "A sphere fractured into Voronoi shards that drift apart and snap back together, each facet shading --accent to --primary by height.",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
+      "files": [
+        {
+          "path": "components/threecn/voronoi-shatter.tsx",
           "type": "registry:ui"
         },
         {
