@@ -39,9 +39,6 @@ export function SponsorCard({ className }: { className?: string }) {
       >
         Become a sponsor
       </a>
-      <p className="mt-3 text-center text-[11px] text-muted-foreground">
-        Opens an email to {SPONSOR_EMAIL}
-      </p>
     </div>
   )
 }
