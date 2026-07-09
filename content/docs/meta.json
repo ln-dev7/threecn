@@ -1,10 +1,11 @@
 {
   "pages": [
+    "[All components](/docs/scenes)",
     "---Getting Started---",
     "index",
     "installation",
     "theming",
-    "---Components---",
+    "---Scenes---",
     "scenes/scene-container",
     "scenes/particle-field",
     "scenes/product-viewer",

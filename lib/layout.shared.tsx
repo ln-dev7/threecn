@@ -14,11 +14,5 @@ export function baseOptions(): BaseLayoutProps {
       url: "/",
     },
     githubUrl: "https://github.com/ln-dev7/threecn",
-    links: [
-      {
-        text: "All components",
-        url: "/docs/scenes",
-      },
-    ],
   }
 }
