@@ -147,3 +147,15 @@
     @apply font-sans;
   }
 }
+
+/*
+ * When a docs page has no headings, fumadocs still renders the TOC title
+ * ("On this page") followed by a "No Headings" placeholder. Hide that whole
+ * block so only the sponsor card (rendered as the TOC footer) shows. We detect
+ * the empty state via the absence of any in-page anchor link inside the TOC —
+ * the sponsor's mailto link doesn't match `a[href^="#"]`.
+ */
+#nd-toc:not(:has(a[href^="#"])) #toc-title,
+#nd-toc:not(:has(a[href^="#"])) #toc-title + * {
+  display: none;
+}
