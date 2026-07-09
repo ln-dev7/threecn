@@ -14,6 +14,9 @@ import {
 } from "@/components/hooks/use-shadcn-theme"
 
 const RADIUS = 1.6
+const THICKNESS = 0.34
+
+type Vec = [number, number, number]
 
 type Shard = {
   geometry: THREE.BufferGeometry
@@ -27,33 +30,41 @@ function fibonacciSites(n: number) {
   const sites: THREE.Vector3[] = []
   const golden = Math.PI * (3 - Math.sqrt(5))
   for (let i = 0; i < n; i++) {
-    const y = 1 - (i / (n - 1)) * 2
-    const r = Math.sqrt(1 - y * y)
+    const y = n === 1 ? 0 : 1 - (i / (n - 1)) * 2
+    const r = Math.sqrt(Math.max(0, 1 - y * y))
     const t = golden * i
     sites.push(new THREE.Vector3(Math.cos(t) * r, y, Math.sin(t) * r))
   }
   return sites
 }
 
-/** Break an icosphere into Voronoi shards by assigning faces to nearest site. */
+function pushTri(out: number[], a: Vec, b: Vec, c: Vec) {
+  out.push(a[0], a[1], a[2], b[0], b[1], b[2], c[0], c[1], c[2])
+}
+
+/**
+ * Break an icosphere into Voronoi shards (faces assigned to their nearest
+ * site), then give every shard real thickness by extruding it toward the
+ * center — so each fragment reads as a solid chunk, not a paper-thin shell.
+ */
 function buildShards(count: number): Shard[] {
-  const base = new THREE.IcosahedronGeometry(RADIUS, 4)
+  const base = new THREE.IcosahedronGeometry(RADIUS, 3)
   const nonIndexed = base.toNonIndexed()
   base.dispose()
-  const pos = nonIndexed.getAttribute("position") as THREE.BufferAttribute
-  const arr = pos.array as Float32Array
+  const arr = (nonIndexed.getAttribute("position") as THREE.BufferAttribute)
+    .array as Float32Array
   const sites = fibonacciSites(count)
   const buckets: number[][] = Array.from({ length: count }, () => [])
-
-  // Triangle = 3 vertices = 9 floats. Assign each to its nearest site.
+  const f = (RADIUS - THICKNESS) / RADIUS
   const c = new THREE.Vector3()
-  for (let f = 0; f < arr.length; f += 9) {
+
+  for (let i = 0; i < arr.length; i += 9) {
+    // Nearest fracture site for this face (by its normalized centroid).
     c.set(
-      (arr[f] + arr[f + 3] + arr[f + 6]) / 3,
-      (arr[f + 1] + arr[f + 4] + arr[f + 7]) / 3,
-      (arr[f + 2] + arr[f + 5] + arr[f + 8]) / 3
-    )
-    c.normalize()
+      (arr[i] + arr[i + 3] + arr[i + 6]) / 3,
+      (arr[i + 1] + arr[i + 4] + arr[i + 7]) / 3,
+      (arr[i + 2] + arr[i + 5] + arr[i + 8]) / 3
+    ).normalize()
     let best = 0
     let bestDot = -Infinity
     for (let s = 0; s < sites.length; s++) {
@@ -63,7 +74,28 @@ function buildShards(count: number): Shard[] {
         best = s
       }
     }
-    for (let k = 0; k < 9; k++) buckets[best].push(arr[f + k])
+    const out = buckets[best]
+
+    // Outer triangle (on the sphere) and its inward-extruded copy.
+    const p: Vec[] = [
+      [arr[i], arr[i + 1], arr[i + 2]],
+      [arr[i + 3], arr[i + 4], arr[i + 5]],
+      [arr[i + 6], arr[i + 7], arr[i + 8]],
+    ]
+    const q: Vec[] = p.map((v) => [v[0] * f, v[1] * f, v[2] * f])
+
+    pushTri(out, p[0], p[1], p[2]) // outer face
+    pushTri(out, q[0], q[2], q[1]) // inner face (reversed winding)
+    // Side walls around the three edges.
+    const edges: [number, number][] = [
+      [0, 1],
+      [1, 2],
+      [2, 0],
+    ]
+    for (const [a, b] of edges) {
+      pushTri(out, p[a], p[b], q[b])
+      pushTri(out, p[a], q[b], q[a])
+    }
   }
   nonIndexed.dispose()
 
@@ -71,7 +103,6 @@ function buildShards(count: number): Shard[] {
   for (const verts of buckets) {
     if (verts.length === 0) continue
     const data = Float32Array.from(verts)
-    // Centroid of this shard.
     const centroid = new THREE.Vector3()
     for (let i = 0; i < data.length; i += 3) {
       centroid.x += data[i]
@@ -79,7 +110,8 @@ function buildShards(count: number): Shard[] {
       centroid.z += data[i + 2]
     }
     centroid.multiplyScalar(3 / data.length)
-    // Recenter geometry on its own centroid so it tumbles in place.
+    // Recenter geometry on its centroid so the mesh can be positioned and
+    // rotated about its own middle.
     for (let i = 0; i < data.length; i += 3) {
       data[i] -= centroid.x
       data[i + 1] -= centroid.y
@@ -96,7 +128,7 @@ function buildShards(count: number): Shard[] {
         Math.random() - 0.5,
         Math.random() - 0.5
       ).normalize(),
-      spin: 0.4 + Math.random() * 0.8,
+      spin: 0.5 + Math.random() * 1.1,
     })
   }
   return shards
@@ -120,16 +152,18 @@ function Shatter({
 
   React.useEffect(() => {
     // Free GPU geometry when the shard set is rebuilt or unmounted.
-    return () => shards.forEach((s) => s.geometry.dispose())
+    const current = shards
+    return () => current.forEach((s) => s.geometry.dispose())
   }, [shards])
 
   useFrame(({ clock }) => {
     const group = groupRef.current
     if (!group) return
     const t = clock.getElapsedTime() * speed
-    // Breathe from assembled (0) to exploded (1) and back.
-    const e = (Math.sin(t * 0.9) * 0.5 + 0.5) ** 1.5
-    group.rotation.y = t * 0.15
+    // Breathe from fully assembled (0) to exploded (1) and back. The easing
+    // lingers on the assembled sphere so the shatter reads clearly.
+    const e = (Math.sin(t * 0.8) * 0.5 + 0.5) ** 1.6
+    group.rotation.y = t * 0.12
 
     for (let i = 0; i < shards.length; i++) {
       const child = group.children[i] as THREE.Mesh | undefined
@@ -141,19 +175,29 @@ function Shatter({
         s.centroid.y * grow,
         s.centroid.z * grow
       )
-      child.rotateOnAxis(s.axis, s.spin * e * 0.05)
+      // Absolute (not accumulated) rotation → identity when assembled.
+      child.quaternion.setFromAxisAngle(s.axis, e * s.spin)
       const mat = child.material as THREE.MeshStandardMaterial
       mat.color
         .copy(accentColor)
-        .lerp(primaryColor, s.centroid.y / RADIUS / 2 + 0.5)
+        .lerp(primaryColor, s.centroid.y / (RADIUS * 2) + 0.5)
     }
   })
 
   return (
     <group ref={groupRef}>
       {shards.map((s, i) => (
-        <mesh key={i} geometry={s.geometry}>
-          <meshStandardMaterial roughness={0.3} metalness={0.35} flatShading />
+        <mesh
+          key={i}
+          geometry={s.geometry}
+          position={[s.centroid.x, s.centroid.y, s.centroid.z]}
+        >
+          <meshStandardMaterial
+            roughness={0.32}
+            metalness={0.3}
+            side={THREE.DoubleSide}
+            flatShading
+          />
         </mesh>
       ))}
     </group>
@@ -173,14 +217,14 @@ export type VoronoiShatterProps = {
 }
 
 /**
- * A sphere fractured into Voronoi shards that drift apart and snap back
- * together in a slow breath, each facet catching the light and shading from
- * `--accent` to `--primary` by height.
+ * A solid sphere fractured into Voronoi shards that drift apart and snap back
+ * together in a slow breath. Each fragment has real thickness, tumbles in
+ * place, and shades from `--accent` to `--primary` by height.
  */
 export function VoronoiShatter({
-  shards = 26,
+  shards = 24,
   speed = 1,
-  spread = 0.6,
+  spread = 0.7,
   className,
   theme = "auto",
   environment = "studio",
