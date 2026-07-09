@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
+import { DocsPage } from "fumadocs-ui/page"
 
 import { ScenesGallery } from "@/components/site/scenes-gallery"
+import { SponsorCard } from "@/components/site/sponsor-card"
 import { ogImageUrl } from "@/lib/site"
 
 const title = "Scenes"
@@ -29,5 +31,13 @@ export const metadata: Metadata = {
 }
 
 export default function ScenesIndexPage() {
-  return <ScenesGallery />
+  return (
+    <DocsPage
+      toc={[]}
+      breadcrumb={{ enabled: false }}
+      tableOfContent={{ footer: <SponsorCard className="mt-4" /> }}
+    >
+      <ScenesGallery />
+    </DocsPage>
+  )
 }

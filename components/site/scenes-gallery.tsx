@@ -14,7 +14,6 @@ import { SCENES } from "@/lib/scenes"
 import { SCENE_CATEGORIES, catalogFor } from "@/lib/scene-catalog"
 import { SceneBySlug, type SceneSlug } from "@/components/threecn/scene-by-slug"
 import { Input } from "@/components/ui/input"
-import { SponsorCard } from "@/components/site/sponsor-card"
 
 const ALL = "All"
 
@@ -44,13 +43,10 @@ export function ScenesGallery() {
   }, [scenes, query, category])
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-5 py-10">
-      <div className="flex flex-col gap-10 lg:flex-row">
-        {/* Main column */}
-        <div className="min-w-0 flex-1">
-          <p className="font-mono text-xs tracking-widest text-primary uppercase">
-            Components
-          </p>
+    <div>
+      <p className="font-mono text-xs tracking-widest text-primary uppercase">
+        Components
+      </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
             Scenes
           </h1>
@@ -148,15 +144,6 @@ export function ScenesGallery() {
               })}
             </div>
           )}
-        </div>
-
-        {/* Sponsor rail */}
-        <aside className="w-full shrink-0 lg:w-64">
-          <div className="lg:sticky lg:top-24">
-            <SponsorCard />
-          </div>
-        </aside>
-      </div>
     </div>
   )
 }
