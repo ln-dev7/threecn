@@ -233,6 +233,16 @@ export function ScenePlayground({ slug }: { slug: string }) {
   const usage = generateUsage(meta.componentName, props, config.controls)
   const url = registryRef(slug)
 
+  // Carry the current customizations into the fullscreen preview via the URL
+  // (only the props that differ from the defaults, to keep it tidy).
+  const fullscreenQuery = new URLSearchParams()
+  for (const [k, v] of Object.entries(props)) {
+    if (v === undefined || v === null || v === config.defaults[k]) continue
+    fullscreenQuery.set(k, String(v))
+  }
+  const fsQs = fullscreenQuery.toString()
+  const fullscreenHref = fsQs ? `/preview/${slug}?${fsQs}` : `/preview/${slug}`
+
   const setProp = (key: string, value: unknown) =>
     setProps((p) => ({ ...p, [key]: value }))
   const reset = () => {
@@ -293,7 +303,7 @@ export function ScenePlayground({ slug }: { slug: string }) {
             className="rounded-lg"
             nativeButton={false}
             render={
-              <Link href={`/preview/${slug}`} target="_blank" rel="noreferrer">
+              <Link href={fullscreenHref} target="_blank" rel="noreferrer">
                 <IconArrowsMaximize className="size-4" /> Fullscreen
               </Link>
             }
