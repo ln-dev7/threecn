@@ -10,6 +10,7 @@ import {
 import { source } from "@/lib/source"
 import { ogImageUrl } from "@/lib/site"
 import { getMDXComponents } from "@/components/mdx"
+import { SponsorCard } from "@/components/site/sponsor-card"
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>
@@ -21,7 +22,11 @@ export default async function Page(props: {
   const MDXContent = page.data.body
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      tableOfContent={{ footer: <SponsorCard className="mt-4" /> }}
+    >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>

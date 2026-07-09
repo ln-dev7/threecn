@@ -7,7 +7,6 @@ import {
   IconArrowUpRight,
   IconBook2,
   IconChevronDown,
-  IconHeartHandshake,
   IconSearch,
 } from "@tabler/icons-react"
 
@@ -15,15 +14,9 @@ import { SCENES } from "@/lib/scenes"
 import { SCENE_CATEGORIES, catalogFor } from "@/lib/scene-catalog"
 import { SceneBySlug, type SceneSlug } from "@/components/threecn/scene-by-slug"
 import { Input } from "@/components/ui/input"
+import { SponsorCard } from "@/components/site/sponsor-card"
 
 const ALL = "All"
-
-const SPONSOR_EMAIL = "leonelngoya@gmail.com"
-const SPONSOR_HREF = `mailto:${SPONSOR_EMAIL}?subject=${encodeURIComponent(
-  "Sponsoring threecn"
-)}&body=${encodeURIComponent(
-  "Hi Leonel,\n\nI'd love to sponsor threecn. A few details:\n\n- Name / company:\n- Website:\n- Tier of interest:\n\nThanks!"
-)}`
 
 export function ScenesGallery() {
   const [query, setQuery] = React.useState("")
@@ -160,28 +153,7 @@ export function ScenesGallery() {
         {/* Sponsor rail */}
         <aside className="w-full shrink-0 lg:w-64">
           <div className="lg:sticky lg:top-24">
-            <div className="rounded-2xl border border-border bg-card p-5">
-              <span className="inline-flex items-center gap-1.5 rounded-md bg-primary/15 px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wide text-primary uppercase">
-                <IconHeartHandshake className="size-3.5" />
-                Sponsor
-              </span>
-              <h3 className="mt-3 text-lg font-semibold tracking-tight">
-                Become a sponsor
-              </h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                threecn is free and open source. Sponsor the project to keep new
-                scenes shipping and get your logo in front of the community.
-              </p>
-              <a
-                href={SPONSOR_HREF}
-                className="mt-4 flex h-9 w-full items-center justify-center rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-              >
-                Become a sponsor
-              </a>
-              <p className="mt-3 text-center text-[11px] text-muted-foreground">
-                Opens an email to {SPONSOR_EMAIL}
-              </p>
-            </div>
+            <SponsorCard />
           </div>
         </aside>
       </div>
