@@ -48,53 +48,55 @@ function Blobs({
   theme: ThemeMode
 }) {
   const { primaryColor, accentColor } = useShadcnTheme(theme)
-  const groupRef = React.useRef<THREE.Group>(null)
   const refs = React.useRef<(THREE.Object3D | null)[]>([])
   const seeds = React.useMemo(() => seedBlobs(blobs), [blobs])
 
-  useFrame(({ clock }, delta) => {
+  // drei feeds each ball's WORLD position into the field as
+  // `0.5 + worldPos * 0.5`, and the balls are children of the scaled
+  // MarchingCubes mesh. So local position × SCALE must stay well inside
+  // [-1, 1] (≈ [0, 1] in field space) or the blobs clip flat against the cube.
+  const AMP = 0.2
+
+  useFrame(({ clock }) => {
     const t = clock.getElapsedTime() * speed
     for (let i = 0; i < seeds.length; i++) {
       const o = refs.current[i]
       if (!o) continue
       const s = seeds[i]
       o.position.set(
-        Math.sin(t * s.ax + s.px) * 0.34,
-        Math.cos(t * s.ay + s.py) * 0.34,
-        Math.sin(t * s.az + s.pz) * 0.34
+        Math.sin(t * s.ax + s.px) * AMP,
+        Math.cos(t * s.ay + s.py) * AMP,
+        Math.sin(t * s.az + s.pz) * AMP
       )
     }
-    if (groupRef.current) groupRef.current.rotation.y += delta * 0.1 * speed
   })
 
   return (
-    <group ref={groupRef}>
-      <MarchingCubes
-        resolution={resolution}
-        maxPolyCount={30000}
-        enableUvs={false}
-        enableColors={false}
-        scale={2.6}
-      >
-        {seeds.map((_, i) => (
-          <MarchingCube
-            key={i}
-            ref={(el: THREE.Object3D | null) => {
-              refs.current[i] = el
-            }}
-            strength={0.42}
-            subtract={10}
-          />
-        ))}
-        <meshStandardMaterial
-          color={primaryColor}
-          emissive={accentColor}
-          emissiveIntensity={0.25}
-          roughness={roughness}
-          metalness={0.25}
+    <MarchingCubes
+      resolution={resolution}
+      maxPolyCount={60000}
+      enableUvs={false}
+      enableColors={false}
+      scale={2.6}
+    >
+      {seeds.map((_, i) => (
+        <MarchingCube
+          key={i}
+          ref={(el: THREE.Object3D | null) => {
+            refs.current[i] = el
+          }}
+          strength={0.5}
+          subtract={12}
         />
-      </MarchingCubes>
-    </group>
+      ))}
+      <meshStandardMaterial
+        color={primaryColor}
+        emissive={accentColor}
+        emissiveIntensity={0.25}
+        roughness={roughness}
+        metalness={0.25}
+      />
+    </MarchingCubes>
   )
 }
 
