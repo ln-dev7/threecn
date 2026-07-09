@@ -16,6 +16,12 @@
     "scenes/crystal",
     "scenes/halo",
     "scenes/dna-helix",
-    "scenes/vortex"
+    "scenes/vortex",
+    "scenes/aurora-ribbons",
+    "scenes/network-graph",
+    "scenes/metaballs",
+    "scenes/cube-wave",
+    "scenes/iso-city",
+    "scenes/warp-tunnel"
   ]
 }
