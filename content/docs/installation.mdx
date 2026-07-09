@@ -17,10 +17,11 @@ are installed automatically by the CLI.
 
 ## Install a single scene
 
-Every scene is published as a registry item. Add one with:
+threecn is published in the shadcn registry under the `@threecn` namespace, so
+you can add any scene by name — no long URLs:
 
 ```bash
-npx shadcn add https://threecn.dev/r/particle-field.json
+npx shadcn@latest add @threecn/particle-field
 ```
 
 This drops two files into your project:
@@ -34,12 +35,12 @@ This drops two files into your project:
 Run the `add` command for each scene you want:
 
 ```bash
-npx shadcn add https://threecn.dev/r/scene-container.json
-npx shadcn add https://threecn.dev/r/particle-field.json
-npx shadcn add https://threecn.dev/r/product-viewer.json
-npx shadcn add https://threecn.dev/r/floating-card-3d.json
-npx shadcn add https://threecn.dev/r/text-3d.json
-npx shadcn add https://threecn.dev/r/product-showcase.json
+npx shadcn@latest add @threecn/scene-container
+npx shadcn@latest add @threecn/particle-field
+npx shadcn@latest add @threecn/product-viewer
+npx shadcn@latest add @threecn/floating-card-3d
+npx shadcn@latest add @threecn/text-3d
+npx shadcn@latest add @threecn/product-showcase
 ```
 
 The hook is only written once — subsequent installs reuse it.

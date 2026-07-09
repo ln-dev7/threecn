@@ -29,7 +29,7 @@ import { PropTable } from "@/components/site/prop-table"
 import { CliTabs } from "@/components/site/cli-tabs"
 import { SceneBySlug, type SceneSlug } from "@/components/threecn/scene-by-slug"
 import { PLAYGROUNDS, type Control } from "@/lib/playground"
-import { getScene, REGISTRY_BASE } from "@/lib/scenes"
+import { getScene, registryRef } from "@/lib/scenes"
 
 /* ── code generation ─────────────────────────────────────────────────────── */
 
@@ -69,7 +69,7 @@ shadcn/ui + Next.js project.
 
 ### Install
 \`\`\`bash
-npx shadcn@latest add ${REGISTRY_BASE}/${slug}.json
+npx shadcn@latest add ${registryRef(slug)}
 \`\`\`
 
 ### Dependencies
@@ -231,7 +231,7 @@ export function ScenePlayground({ slug }: { slug: string }) {
     (k) => props[k] !== config.defaults[k]
   )
   const usage = generateUsage(meta.componentName, props, config.controls)
-  const url = `${REGISTRY_BASE}/${slug}.json`
+  const url = registryRef(slug)
 
   const setProp = (key: string, value: unknown) =>
     setProps((p) => ({ ...p, [key]: value }))

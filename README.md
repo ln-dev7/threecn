@@ -5,10 +5,11 @@
 threecn is a shadcn-style registry of ready-to-use React Three Fiber (R3F) +
 drei scenes. Each scene is theme-aware via a `useShadcnTheme()` hook that bridges
 your CSS variables into Three.js materials — so dark mode (and any token change)
-just works. Install any scene with the shadcn CLI.
+just works. Published in the shadcn registry under the `@threecn` namespace, so
+you install any scene by name.
 
 ```bash
-npx shadcn add https://threecn.dev/r/particle-field.json
+npx shadcn@latest add @threecn/particle-field
 ```
 
 ```tsx
