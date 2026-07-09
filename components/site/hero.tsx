@@ -6,7 +6,7 @@ import { IconArrowRight, IconBrandGithub } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { CodePreview } from "@/components/site/code-preview"
 import { DotField } from "@/components/site/dot-field"
-import { REGISTRY_BASE } from "@/lib/scenes"
+import { registryRef } from "@/lib/scenes"
 import { commandFor, usePackageManager } from "@/lib/package-manager"
 
 const GITHUB_URL = "https://github.com/ln-dev7/threecn"
@@ -44,7 +44,7 @@ export function Hero() {
             className="rounded-lg"
             nativeButton={false}
             render={
-              <Link href="/#scenes">
+              <Link href="/docs/scenes">
                 Browse scenes
                 <IconArrowRight className="size-4" />
               </Link>
@@ -66,7 +66,7 @@ export function Hero() {
 
         <CodePreview
           command
-          code={commandFor(manager, `${REGISTRY_BASE}/particle-field.json`)}
+          code={commandFor(manager, registryRef("particle-field"))}
           className="mt-10 w-full max-w-xl bg-background/60 backdrop-blur"
         />
       </div>

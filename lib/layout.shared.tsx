@@ -17,7 +17,7 @@ export function baseOptions(): BaseLayoutProps {
     links: [
       {
         text: "Components",
-        url: "/#scenes",
+        url: "/docs/scenes",
       },
     ],
   }

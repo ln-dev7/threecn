@@ -3,17 +3,22 @@
 import Link from "next/link"
 import {
   IconArrowsMaximize,
+  IconArrowRight,
   IconArrowUpRight,
   IconBook2,
 } from "@tabler/icons-react"
 
-import { SCENES, REGISTRY_BASE } from "@/lib/scenes"
+import { SCENES, registryRef } from "@/lib/scenes"
+import { catalogFor } from "@/lib/scene-catalog"
 import { SceneBySlug, type SceneSlug } from "@/components/threecn/scene-by-slug"
 import { CodePreview } from "@/components/site/code-preview"
+import { Button } from "@/components/ui/button"
 import { commandFor, usePackageManager } from "@/lib/package-manager"
 
 export function ScenesGrid() {
   const { manager } = usePackageManager()
+  const featured = SCENES.filter((s) => catalogFor(s.slug)?.featured)
+  const total = SCENES.filter((s) => catalogFor(s.slug)).length
   return (
     <section id="scenes" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24">
       <div className="mb-12 max-w-2xl">
@@ -24,13 +29,14 @@ export function ScenesGrid() {
           Ready-to-use 3D scenes
         </h2>
         <p className="mt-3 text-muted-foreground">
-          Each scene is a single file plus the theme hook. Install it with the
-          shadcn CLI and drop it in — colors follow your design tokens.
+          A few favorites below. Each scene is a single file plus the theme
+          hook — install it with the shadcn CLI and its colors follow your
+          design tokens.
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {SCENES.map((scene) => (
+        {featured.map((scene) => (
           <div
             key={scene.slug}
             className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5"
@@ -73,15 +79,27 @@ export function ScenesGrid() {
               </div>
               <CodePreview
                 command
-                code={commandFor(
-                  manager,
-                  `${REGISTRY_BASE}/${scene.slug}.json`
-                )}
+                code={commandFor(manager, registryRef(scene.slug))}
                 className="mt-auto text-xs"
               />
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-12 flex justify-center">
+        <Button
+          size="lg"
+          variant="outline"
+          className="rounded-lg"
+          nativeButton={false}
+          render={
+            <Link href="/docs/scenes">
+              See all {total} scenes
+              <IconArrowRight className="size-4" />
+            </Link>
+          }
+        />
       </div>
     </section>
   )

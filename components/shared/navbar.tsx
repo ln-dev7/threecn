@@ -10,7 +10,7 @@ const GITHUB_URL = "https://github.com/ln-dev7/threecn"
 
 const links = [
   { label: "Docs", href: "/docs" },
-  { label: "Components", href: "/#scenes" },
+  { label: "Components", href: "/docs/scenes" },
   { label: "GitHub", href: GITHUB_URL, external: true },
 ]
 
