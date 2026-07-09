@@ -86,6 +86,38 @@ function Rig({
   )
 }
 
+/**
+ * Track whether an element is near the viewport. WebGL contexts are a scarce
+ * resource (browsers cap them at ~8-16), so scenes only hold one while they are
+ * on (or close to) screen. The generous `rootMargin` pre-mounts a scene just
+ * before it scrolls into view, avoiding a blank first frame.
+ */
+function useInView(
+  ref: React.RefObject<HTMLElement | null>,
+  rootMargin: string
+): boolean {
+  const [inView, setInView] = React.useState(false)
+
+  React.useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (typeof IntersectionObserver === "undefined") {
+      // No observer available: render eagerly rather than never mounting.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setInView(true)
+      return
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [ref, rootMargin])
+
+  return inView
+}
+
 export type SceneContainerProps = {
   className?: string
   theme?: ThemeMode
@@ -103,6 +135,14 @@ export type SceneContainerProps = {
    * true. Set false if the scene provides its own controls.
    */
   orbit?: boolean
+  /**
+   * Mount the WebGL canvas only while it is near the viewport, and tear it down
+   * once it scrolls away. Keeps a grid of many scenes from exhausting the
+   * browser's WebGL context limit and stops `useFrame` from running offscreen.
+   * Defaults to true. Set false for a scene that must always render (e.g. a
+   * persistent hero background).
+   */
+  lazy?: boolean
 }
 
 /**
@@ -120,26 +160,33 @@ export function SceneContainer({
   children,
   overlay,
   orbit = true,
+  lazy = true,
 }: SceneContainerProps) {
+  const wrapRef = React.useRef<HTMLDivElement>(null)
+  const inView = useInView(wrapRef, "300px")
+  const active = lazy ? inView : true
+
   return (
-    <div className={cn("relative h-full w-full", className)}>
-      <Canvas
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-        camera={{ position: camera, fov, near: 0.1, far: 100 }}
-      >
-        <Rig preset={environment} fog={fog} theme={theme} />
-        <React.Suspense fallback={null}>{children}</React.Suspense>
-        {orbit ? (
-          <OrbitControls
-            makeDefault
-            enablePan={false}
-            enableZoom={false}
-            enableDamping
-            dampingFactor={0.1}
-          />
-        ) : null}
-      </Canvas>
+    <div ref={wrapRef} className={cn("relative h-full w-full", className)}>
+      {active ? (
+        <Canvas
+          dpr={[1, 2]}
+          gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+          camera={{ position: camera, fov, near: 0.1, far: 100 }}
+        >
+          <Rig preset={environment} fog={fog} theme={theme} />
+          <React.Suspense fallback={null}>{children}</React.Suspense>
+          {orbit ? (
+            <OrbitControls
+              makeDefault
+              enablePan={false}
+              enableZoom={false}
+              enableDamping
+              dampingFactor={0.1}
+            />
+          ) : null}
+        </Canvas>
+      ) : null}
       {overlay ? <div className="pointer-events-none absolute inset-0">{overlay}</div> : null}
     </div>
   )

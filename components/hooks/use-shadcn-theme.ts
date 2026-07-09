@@ -46,27 +46,75 @@ function createDefaults(): ShadcnThemeColors {
   }
 }
 
+/** Matches a bare shadcn HSL triplet, e.g. "263 70% 50%" (optional "/ alpha"). */
+const HSL_TRIPLET = /^-?[\d.]+\s+-?[\d.]+%\s+-?[\d.]+%(\s*\/\s*[\d.]+%?)?$/
+
 /**
- * Parse a raw CSS HSL triplet ("263 70% 50%") into a `THREE.Color`.
- * Falls back to `THREE.Color.setStyle` for hsl()/rgb()/hex strings, so the
- * hook keeps working even if a consumer swaps the variable format.
+ * A lazily-created 1x1 canvas 2D context used to normalise arbitrary CSS
+ * colors. The browser's own color parser resolves ANY format the CSS spec
+ * supports — including `oklch()` (Tailwind v4 / recent shadcn), `color()`,
+ * `hsl()`, `rgb()`, hex and named colors — and serialises the result back as
+ * `#rrggbb` / `rgba(...)`, which `THREE.Color.setStyle` understands.
+ */
+let probeCtx: CanvasRenderingContext2D | null | undefined
+function getProbeCtx(): CanvasRenderingContext2D | null {
+  if (probeCtx !== undefined) return probeCtx
+  if (typeof document === "undefined") return (probeCtx = null)
+  probeCtx = document.createElement("canvas").getContext("2d")
+  return probeCtx
+}
+
+/**
+ * Normalise any CSS color string to a form THREE can parse (or `null` if the
+ * browser rejects it). Assigning an invalid color to `fillStyle` is a no-op, so
+ * we probe with two different sentinels: if the result differs, the input was
+ * valid and both reflect its normalised value; if it "sticks" to a sentinel,
+ * the input was invalid.
+ */
+function normalizeColor(input: string): string | null {
+  const ctx = getProbeCtx()
+  if (!ctx) return null
+  ctx.fillStyle = "#000"
+  ctx.fillStyle = input
+  const a = ctx.fillStyle
+  ctx.fillStyle = "#fff"
+  ctx.fillStyle = input
+  const b = ctx.fillStyle
+  return a === b ? a : null
+}
+
+/**
+ * Parse a raw CSS color (as read from a custom property) into a `THREE.Color`.
+ *
+ * shadcn ships colors as bare HSL triplets ("263 70% 50%"), which we wrap in
+ * `hsl(...)`. Everything else — `oklch()`, `rgb()`, `#hex`, `hsl()`, named — is
+ * handed to the browser's parser via a canvas probe, so modern oklch-based
+ * themes resolve correctly instead of silently falling back to the default.
  */
 function parseColor(raw: string, target: Color): Color {
   const value = raw.trim()
   if (!value) return target
 
-  // "H S% L%"  (the shadcn convention)
-  const triplet = value.match(
-    /^(-?[\d.]+)\s+(-?[\d.]+)%\s+(-?[\d.]+)%/
-  )
+  const candidate = HSL_TRIPLET.test(value) ? `hsl(${value})` : value
+
+  // Preferred path: let the browser resolve any CSS color format.
+  const normalized = normalizeColor(candidate)
+  if (normalized) {
+    try {
+      return target.setStyle(normalized)
+    } catch {
+      /* fall through to the manual paths below */
+    }
+  }
+
+  // Fallbacks for environments without a canvas (e.g. exotic SSR shims).
+  const triplet = value.match(/^(-?[\d.]+)\s+(-?[\d.]+)%\s+(-?[\d.]+)%/)
   if (triplet) {
     const h = parseFloat(triplet[1]) / 360
     const s = parseFloat(triplet[2]) / 100
     const l = parseFloat(triplet[3]) / 100
     return target.setHSL(h, s, l)
   }
-
-  // Anything THREE understands natively: hsl(), rgb(), #hex, named.
   try {
     return target.setStyle(value)
   } catch {
