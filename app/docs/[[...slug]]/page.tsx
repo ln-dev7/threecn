@@ -1,11 +1,6 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
-import {
-  DocsBody,
-  DocsDescription,
-  DocsPage,
-  DocsTitle,
-} from "fumadocs-ui/page"
+import { DocsDescription, DocsPage, DocsTitle } from "fumadocs-ui/page"
 
 import { source } from "@/lib/source"
 import { ogImageUrl } from "@/lib/site"
@@ -29,9 +24,10 @@ export default async function Page(props: {
     >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
-      <DocsBody>
+      {/* shadcn/typeset replaces fumadocs' DocsBody prose styles — see app/typeset.css */}
+      <div className="typeset typeset-docs flex-1">
         <MDXContent components={getMDXComponents()} />
-      </DocsBody>
+      </div>
     </DocsPage>
   )
 }

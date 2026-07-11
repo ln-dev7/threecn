@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
+@import "./typeset.css";
 
 @source "../components";
 @source "../app";
@@ -134,6 +135,25 @@
   --sidebar-accent-foreground: 0 0% 98%;
   --sidebar-border: 240 3.7% 15.9%;
   --sidebar-ring: 263 70% 60%;
+}
+
+/*
+ * Docs preset for shadcn/typeset (replaces fumadocs' DocsBody prose styles).
+ * Fonts inherit from the app: body via font-sans on <body>, headings/mono via
+ * the --font-heading / --font-mono theme tokens that typeset.css reads.
+ */
+.typeset-docs {
+  --typeset-size: 15px;
+  --typeset-leading: 1.75;
+  --typeset-flow: 1.25em;
+}
+
+/*
+ * Fumadocs wraps every heading in an anchor link (<h2><a href="#…">).
+ * Typeset underlines all links, so strip that back for headings.
+ */
+.typeset :where(h1, h2, h3, h4, h5, h6) :where(a) {
+  text-decoration-line: none;
 }
 
 @layer base {
