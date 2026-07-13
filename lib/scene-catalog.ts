@@ -46,6 +46,9 @@ export const SCENE_CATALOG: Record<string, CatalogEntry> = {
   cloth: { category: "Objects", isNew: true },
   boids: { category: "Particles", isNew: true, featured: true },
   "voronoi-shatter": { category: "Objects", isNew: true, featured: true },
+  tesseract: { category: "Objects", isNew: true },
+  "pendulum-wave": { category: "Objects", isNew: true },
+  "pitch-momentum": { category: "Particles", isNew: true },
 }
 
 export function catalogFor(slug: string): CatalogEntry | undefined {

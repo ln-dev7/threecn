@@ -727,6 +727,105 @@ export const SCENES: SceneMeta[] = [
       ...commonProps,
     ],
   },
+  {
+    slug: "tesseract",
+    name: "Tesseract",
+    componentName: "Tesseract",
+    title: "Tesseract",
+    description:
+      "A 4D hypercube in double rotation projected into 3D — the inner cell endlessly swells through the outer, struts shading --accent to --primary by 4D depth.",
+    props: [
+      {
+        name: "size",
+        type: "number",
+        default: "1",
+        description: "Overall projected scale of the hypercube.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Rotation speed multiplier (4D and 3D spins).",
+      },
+      {
+        name: "thickness",
+        type: "number",
+        default: "0.05",
+        description: "Strut radius.",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "pendulum-wave",
+    name: "PendulumWave",
+    componentName: "PendulumWave",
+    title: "Pendulum Wave",
+    description:
+      "A row of pendulums with stepped periods drifting into snakes, arches and chaos before snapping back in phase, bobs tinted --accent to --primary across the swing.",
+    props: [
+      {
+        name: "count",
+        type: "number",
+        default: "15",
+        description: "Number of pendulums in the row.",
+      },
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Time speed multiplier.",
+      },
+      {
+        name: "swing",
+        type: "number",
+        default: "26",
+        description: "Release amplitude in degrees.",
+      },
+      ...commonProps,
+    ],
+  },
+  {
+    slug: "pitch-momentum",
+    name: "PitchMomentum",
+    componentName: "PitchMomentum",
+    title: "Pitch Momentum",
+    description:
+      "A soccer pitch of dots where two rival particle mountains surge and clash as momentum swings, crests whitening where the fronts collide.",
+    props: [
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Animation speed multiplier.",
+      },
+      {
+        name: "height",
+        type: "number",
+        default: "1.7",
+        description: "Peak height of the momentum mountains.",
+      },
+      {
+        name: "density",
+        type: "number",
+        default: "230",
+        description: "Points across the platform's length (grid resolution).",
+      },
+      {
+        name: "colorA",
+        type: "string",
+        default: `"#60a5fa"`,
+        description: "Color of the first team's mountain.",
+      },
+      {
+        name: "colorB",
+        type: "string",
+        default: `"#dc2626"`,
+        description: "Color of the second team's mountain.",
+      },
+      ...commonProps,
+    ],
+  },
 ]
 
 /** Raw registry item URLs (used to fetch published JSON). */

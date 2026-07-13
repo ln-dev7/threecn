@@ -28,6 +28,9 @@ import type { CurlFlowProps } from "@/components/threecn/curl-flow"
 import type { ClothProps } from "@/components/threecn/cloth"
 import type { BoidsProps } from "@/components/threecn/boids"
 import type { VoronoiShatterProps } from "@/components/threecn/voronoi-shatter"
+import type { TesseractProps } from "@/components/threecn/tesseract"
+import type { PendulumWaveProps } from "@/components/threecn/pendulum-wave"
+import type { PitchMomentumProps } from "@/components/threecn/pitch-momentum"
 
 function Loading() {
   return (
@@ -152,6 +155,20 @@ const VoronoiShatter = dynamic(
     ),
   { ssr: false, loading: Loading }
 )
+const Tesseract = dynamic(
+  () => import("@/components/threecn/tesseract").then((m) => m.Tesseract),
+  { ssr: false, loading: Loading }
+)
+const PendulumWave = dynamic(
+  () =>
+    import("@/components/threecn/pendulum-wave").then((m) => m.PendulumWave),
+  { ssr: false, loading: Loading }
+)
+const PitchMomentum = dynamic(
+  () =>
+    import("@/components/threecn/pitch-momentum").then((m) => m.PitchMomentum),
+  { ssr: false, loading: Loading }
+)
 export type SceneSlug =
   | "scene-container"
   | "particle-field"
@@ -177,6 +194,9 @@ export type SceneSlug =
   | "cloth"
   | "boids"
   | "voronoi-shatter"
+  | "tesseract"
+  | "pendulum-wave"
+  | "pitch-momentum"
 
 export function SceneBySlug({
   slug,
@@ -264,6 +284,12 @@ export function SceneBySlug({
       return <Boids {...(shared as BoidsProps)} />
     case "voronoi-shatter":
       return <VoronoiShatter {...(shared as VoronoiShatterProps)} />
+    case "tesseract":
+      return <Tesseract {...(shared as TesseractProps)} />
+    case "pendulum-wave":
+      return <PendulumWave {...(shared as PendulumWaveProps)} />
+    case "pitch-momentum":
+      return <PitchMomentum {...(shared as PitchMomentumProps)} />
     default:
       return null
   }

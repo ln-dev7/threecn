@@ -29,6 +29,9 @@
     "scenes/curl-flow",
     "scenes/cloth",
     "scenes/boids",
-    "scenes/voronoi-shatter"
+    "scenes/voronoi-shatter",
+    "scenes/tesseract",
+    "scenes/pendulum-wave",
+    "scenes/pitch-momentum"
   ]
 }

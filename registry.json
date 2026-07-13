@@ -303,7 +303,7 @@
       "name": "aurora-ribbons",
       "type": "registry:ui",
       "title": "AuroraRibbons",
-      "description": "Silky aurora ribbons drifting in slow sine waves, shaded with a --primary \u2192 --accent gradient.",
+      "description": "Silky aurora ribbons drifting in slow sine waves, shaded with a --primary → --accent gradient.",
       "dependencies": [
         "three",
         "@react-three/fiber",
@@ -587,6 +587,81 @@
       "files": [
         {
           "path": "components/threecn/voronoi-shatter.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "tesseract",
+      "type": "registry:ui",
+      "title": "Tesseract",
+      "description": "A 4D hypercube in double rotation projected into 3D — the inner cell endlessly swells through the outer, struts shading --accent to --primary by 4D depth.",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
+      "files": [
+        {
+          "path": "components/threecn/tesseract.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "pendulum-wave",
+      "type": "registry:ui",
+      "title": "PendulumWave",
+      "description": "A row of pendulums with stepped periods drifting into snakes, arches and chaos before snapping back in phase, bobs tinted --accent to --primary across the swing.",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
+      "files": [
+        {
+          "path": "components/threecn/pendulum-wave.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "pitch-momentum",
+      "type": "registry:ui",
+      "title": "PitchMomentum",
+      "description": "A soccer pitch of dots where two rival particle mountains surge and clash as momentum swings, crests whitening where the fronts collide.",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
+      "files": [
+        {
+          "path": "components/threecn/pitch-momentum.tsx",
           "type": "registry:ui"
         },
         {
