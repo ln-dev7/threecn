@@ -24,6 +24,12 @@ export function Footer() {
             <Link href="/docs" className="text-muted-foreground hover:text-foreground">
               Docs
             </Link>
+            <Link
+              href="/sponsors"
+              className="text-muted-foreground hover:text-foreground"
+            >
+              Sponsors
+            </Link>
             <a
               href={GITHUB_URL}
               target="_blank"

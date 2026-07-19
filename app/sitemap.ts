@@ -9,7 +9,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const docPaths = source.getPages().map((p) => p.url)
   const previewPaths = SCENES.map((s) => `/preview/${s.slug}`)
-  const paths = Array.from(new Set(["", ...docPaths, ...previewPaths]))
+  const paths = Array.from(
+    new Set(["", "/sponsors", ...docPaths, ...previewPaths])
+  )
 
   const priorityFor = (path: string) => {
     if (path === "") return 1
