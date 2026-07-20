@@ -17,6 +17,8 @@ import { commandFor, usePackageManager } from "@/lib/package-manager"
 
 export function ScenesGrid() {
   const { manager } = usePackageManager()
+  // This section always shows EXACTLY 6 featured scenes (two rows of three).
+  // Curate the `featured` flags in lib/scene-catalog.ts to keep the count at 6.
   const featured = SCENES.filter((s) => catalogFor(s.slug)?.featured)
   const total = SCENES.filter((s) => catalogFor(s.slug)).length
   return (

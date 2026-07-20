@@ -18,7 +18,11 @@ export type CatalogEntry = {
   category: SceneCategory
   /** Show a NEW badge in the gallery. */
   isNew?: boolean
-  /** Surface on the home page's curated grid. */
+  /**
+   * Surface on the home page's "Ready-to-use 3D scenes" grid.
+   * IMPORTANT: that section shows EXACTLY 6 scenes (two rows of three) —
+   * when featuring a new scene, unfeature another so the count stays at 6.
+   */
   featured?: boolean
 }
 
@@ -34,7 +38,7 @@ export const SCENE_CATALOG: Record<string, CatalogEntry> = {
   halo: { category: "Objects" },
   "dna-helix": { category: "Objects" },
   vortex: { category: "Backgrounds" },
-  "aurora-ribbons": { category: "Backgrounds", featured: true },
+  "aurora-ribbons": { category: "Backgrounds" },
   "network-graph": { category: "Backgrounds" },
   metaballs: { category: "Objects", featured: true },
   "cube-wave": { category: "Backgrounds" },
@@ -45,10 +49,10 @@ export const SCENE_CATALOG: Record<string, CatalogEntry> = {
   "curl-flow": { category: "Particles", isNew: true },
   cloth: { category: "Objects", isNew: true },
   boids: { category: "Particles", isNew: true, featured: true },
-  "voronoi-shatter": { category: "Objects", isNew: true, featured: true },
+  "voronoi-shatter": { category: "Objects", isNew: true },
   tesseract: { category: "Objects", isNew: true },
   "pendulum-wave": { category: "Objects", isNew: true },
-  "pitch-momentum": { category: "Particles", isNew: true },
+  "pitch-momentum": { category: "Particles", isNew: true, featured: true },
   "world-cup": { category: "Objects", isNew: true, featured: true },
 }
 
