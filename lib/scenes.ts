@@ -826,6 +826,35 @@ export const SCENES: SceneMeta[] = [
       ...commonProps,
     ],
   },
+  {
+    slug: "world-cup",
+    name: "WorldCup",
+    componentName: "WorldCup",
+    title: "World Cup",
+    description:
+      "The World Cup trophy modeled procedurally: two sculpted figures with raised arms lift a continent-embossed globe above a green-banded base, turning under studio light amid a drift of confetti.",
+    props: [
+      {
+        name: "speed",
+        type: "number",
+        default: "1",
+        description: "Rotation and confetti speed multiplier.",
+      },
+      {
+        name: "gold",
+        type: "string",
+        default: `"#e3b23c"`,
+        description: "Color of the gold.",
+      },
+      {
+        name: "confetti",
+        type: "number",
+        default: "90",
+        description: "Number of falling confetti particles (0 disables them).",
+      },
+      ...commonProps,
+    ],
+  },
 ]
 
 /** Raw registry item URLs (used to fetch published JSON). */

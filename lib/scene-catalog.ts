@@ -49,6 +49,7 @@ export const SCENE_CATALOG: Record<string, CatalogEntry> = {
   tesseract: { category: "Objects", isNew: true },
   "pendulum-wave": { category: "Objects", isNew: true },
   "pitch-momentum": { category: "Particles", isNew: true },
+  "world-cup": { category: "Objects", isNew: true, featured: true },
 }
 
 export function catalogFor(slug: string): CatalogEntry | undefined {

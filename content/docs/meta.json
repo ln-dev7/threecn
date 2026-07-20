@@ -32,6 +32,7 @@
     "scenes/voronoi-shatter",
     "scenes/tesseract",
     "scenes/pendulum-wave",
-    "scenes/pitch-momentum"
+    "scenes/pitch-momentum",
+    "scenes/world-cup"
   ]
 }

@@ -31,6 +31,7 @@ import type { VoronoiShatterProps } from "@/components/threecn/voronoi-shatter"
 import type { TesseractProps } from "@/components/threecn/tesseract"
 import type { PendulumWaveProps } from "@/components/threecn/pendulum-wave"
 import type { PitchMomentumProps } from "@/components/threecn/pitch-momentum"
+import type { WorldCupProps } from "@/components/threecn/world-cup"
 
 function Loading() {
   return (
@@ -169,6 +170,10 @@ const PitchMomentum = dynamic(
     import("@/components/threecn/pitch-momentum").then((m) => m.PitchMomentum),
   { ssr: false, loading: Loading }
 )
+const WorldCup = dynamic(
+  () => import("@/components/threecn/world-cup").then((m) => m.WorldCup),
+  { ssr: false, loading: Loading }
+)
 export type SceneSlug =
   | "scene-container"
   | "particle-field"
@@ -197,6 +202,7 @@ export type SceneSlug =
   | "tesseract"
   | "pendulum-wave"
   | "pitch-momentum"
+  | "world-cup"
 
 export function SceneBySlug({
   slug,
@@ -290,6 +296,8 @@ export function SceneBySlug({
       return <PendulumWave {...(shared as PendulumWaveProps)} />
     case "pitch-momentum":
       return <PitchMomentum {...(shared as PitchMomentumProps)} />
+    case "world-cup":
+      return <WorldCup {...(shared as WorldCupProps)} />
     default:
       return null
   }

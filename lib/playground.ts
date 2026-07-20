@@ -877,4 +877,33 @@ export const PLAYGROUNDS: Record<SceneSlug, PlaygroundConfig> = {
     ],
     dependencies: R3F_DEPS,
   },
+  "world-cup": {
+    defaults: { speed: 1, gold: "#e3b23c", confetti: 90, environment: "studio" },
+    controls: [
+      {
+        kind: "slider",
+        prop: "speed",
+        label: "Speed",
+        min: 0.1,
+        max: 3,
+        step: 0.1,
+      },
+      { kind: "color", prop: "gold", label: "Gold" },
+      {
+        kind: "slider",
+        prop: "confetti",
+        label: "Confetti",
+        min: 0,
+        max: 200,
+        step: 10,
+      },
+      {
+        kind: "select",
+        prop: "environment",
+        label: "Environment",
+        options: ENV_OPTIONS,
+      },
+    ],
+    dependencies: R3F_DEPS,
+  },
 }

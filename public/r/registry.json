@@ -673,6 +673,31 @@
           "type": "registry:hook"
         }
       ]
+    },
+    {
+      "name": "world-cup",
+      "type": "registry:ui",
+      "title": "WorldCup",
+      "description": "The World Cup trophy modeled procedurally: two sculpted figures with raised arms lift a continent-embossed globe above a green-banded base, turning under studio light amid a drift of confetti.",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
+      "files": [
+        {
+          "path": "components/threecn/world-cup.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/threecn/scene-container.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/hooks/use-shadcn-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
     }
   ]
 }
