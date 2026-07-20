@@ -19,11 +19,12 @@ export type CatalogEntry = {
   /** Show a NEW badge in the gallery. */
   isNew?: boolean
   /**
-   * Surface on the home page's "Ready-to-use 3D scenes" grid.
+   * Position (1–6) on the home page's "Ready-to-use 3D scenes" grid.
    * IMPORTANT: that section shows EXACTLY 6 scenes (two rows of three) —
-   * when featuring a new scene, unfeature another so the count stays at 6.
+   * when featuring a new scene, unfeature another so the count stays at 6,
+   * and keep the ranks a contiguous 1–6 (they define the display order).
    */
-  featured?: boolean
+  featured?: number
 }
 
 export const SCENE_CATALOG: Record<string, CatalogEntry> = {
@@ -34,26 +35,26 @@ export const SCENE_CATALOG: Record<string, CatalogEntry> = {
   "product-showcase": { category: "Objects" },
   globe: { category: "Objects" },
   "wave-terrain": { category: "Backgrounds" },
-  crystal: { category: "Objects", featured: true },
+  crystal: { category: "Objects", featured: 3 },
   halo: { category: "Objects" },
   "dna-helix": { category: "Objects" },
   vortex: { category: "Backgrounds" },
   "aurora-ribbons": { category: "Backgrounds" },
   "network-graph": { category: "Backgrounds" },
-  metaballs: { category: "Objects", featured: true },
+  metaballs: { category: "Objects", featured: 4 },
   "cube-wave": { category: "Backgrounds" },
   "iso-city": { category: "Objects" },
-  "warp-tunnel": { category: "Backgrounds", featured: true },
+  "warp-tunnel": { category: "Backgrounds", featured: 5 },
   phyllotaxis: { category: "Objects", isNew: true },
   "strange-attractor": { category: "Backgrounds", isNew: true },
   "curl-flow": { category: "Particles", isNew: true },
   cloth: { category: "Objects", isNew: true },
-  boids: { category: "Particles", isNew: true, featured: true },
+  boids: { category: "Particles", isNew: true },
   "voronoi-shatter": { category: "Objects", isNew: true },
-  tesseract: { category: "Objects", isNew: true },
+  tesseract: { category: "Objects", isNew: true, featured: 6 },
   "pendulum-wave": { category: "Objects", isNew: true },
-  "pitch-momentum": { category: "Particles", isNew: true, featured: true },
-  "world-cup": { category: "Objects", isNew: true, featured: true },
+  "pitch-momentum": { category: "Particles", isNew: true, featured: 1 },
+  "world-cup": { category: "Objects", isNew: true, featured: 2 },
 }
 
 export function catalogFor(slug: string): CatalogEntry | undefined {

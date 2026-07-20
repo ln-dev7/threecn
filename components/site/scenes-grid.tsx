@@ -17,9 +17,13 @@ import { commandFor, usePackageManager } from "@/lib/package-manager"
 
 export function ScenesGrid() {
   const { manager } = usePackageManager()
-  // This section always shows EXACTLY 6 featured scenes (two rows of three).
-  // Curate the `featured` flags in lib/scene-catalog.ts to keep the count at 6.
-  const featured = SCENES.filter((s) => catalogFor(s.slug)?.featured)
+  // This section always shows EXACTLY 6 featured scenes (two rows of three),
+  // ordered by their `featured` rank. Curate the ranks in lib/scene-catalog.ts
+  // to keep the count at 6.
+  const featured = SCENES.filter((s) => catalogFor(s.slug)?.featured).sort(
+    (a, b) =>
+      (catalogFor(a.slug)?.featured ?? 0) - (catalogFor(b.slug)?.featured ?? 0)
+  )
   const total = SCENES.filter((s) => catalogFor(s.slug)).length
   return (
     <section id="scenes" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24">
